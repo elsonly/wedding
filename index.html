@@ -15,7 +15,6 @@
             --color-gold-light: #f9e5c9;
             --color-gold: #d4af37;
             --color-gold-dark: #aa7c11;
-            /* 換成極度優雅的淡粉色背景 */
             --color-bg-center: #fff5f7;
             --color-bg-edge: #fce8eb;
             --color-text-main: #3d3b38;
@@ -198,6 +197,12 @@
             box-shadow: 0 15px 25px -5px rgba(212, 163, 115, 0.6);
             transform: translateY(-2px);
         }
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
         .text-primary { color: var(--color-primary); }
         .bg-primary { background-color: var(--color-primary); }
@@ -253,6 +258,9 @@
         }
         .toast.show {
             bottom: 40px;
+        }
+        .toast.error {
+            background: linear-gradient(135deg, #e57373, #ef5350);
         }
     </style>
 </head>
@@ -428,14 +436,8 @@
                 <p class="text-xs text-gray-400 font-sans tracking-wide">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
             </div>
 
-            <!-- Hidden Iframe for silent submission -->
-            <iframe name="hidden_iframe" id="hidden_iframe" width="80%" style="display:none;"></iframe>
-
-            <form action="https://docs.google.com/forms/d/e/1FAIpQLSd8zwFKDev_JLWvFSDgRstIqCVZvXrvqvlrIVNyy2IDvl7kKQ/formResponse" 
-                  method="post" target="hidden_iframe" 
-                  onsubmit="submitted=true;" 
-                  id="rsvp-form"
-                  class="v-card ornate-border p-8 md:p-14 space-y-10">
+            <!-- Removed hidden iframe, using Fetch API -->
+            <form id="rsvp-form" class="v-card ornate-border p-8 md:p-14 space-y-10">
 
                 <div class="relative pt-2">
                     <label class="form-label mb-2" for="entry.2047345391">
@@ -450,7 +452,6 @@
                     </label>
                     <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
-                        <!-- 🚨檢查這裡：如果有英文請改掉！ -->
                         <option value="男方親友">男方親友</option> 
                         <option value="孟庭的親友 Tiana's friend">女方親友</option>
                         <option value="共同親友">共同親友</option>
@@ -484,7 +485,6 @@
                 <!-- 動態顯示區塊 (僅出席者填寫) -->
                 <div id="attending-section" class="conditional-field border-t border-gray-100 pt-8 mt-4">
                     
-                    <!-- Q5. 參加人數 -->
                     <div class="relative">
                         <label class="form-label mb-2" for="entry.1188616045">
                             參加午宴人數 (含本人) <span class="eng">GUESTS COUNT</span>
@@ -501,9 +501,8 @@
                     </div>
 
                     <!-- 進階動態區塊 (午宴人數 > 0 顯示兒童椅與素食) -->
-                    <div id="banquet-section" class="conditional-field bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner mt-6">
+                    <div id="banquet-section" class="conditional-field bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner">
                         <div class="space-y-6">
-                            <!-- Q6. 兒童椅 -->
                             <div class="relative">
                                 <label class="form-label mb-2" for="entry.630238932">
                                     是否需要兒童椅 <span class="eng">BABY CHAIR</span>
@@ -516,7 +515,6 @@
                                 </select>
                             </div>
 
-                            <!-- Q7. 素食人數 (✅ 已加回此區塊，並確認綁定 ID 1535829381) -->
                             <div class="relative">
                                 <label class="form-label mb-2" for="entry.1535829381">
                                     需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
@@ -533,8 +531,7 @@
                     </div>
                 </div>
 
-                <!-- Q8. 喜帖需求 -->
-                <div class="relative mt-8 border-t border-gray-100 pt-8">
+                <div class="relative mt-8">
                     <label class="form-label mb-2" for="entry.2080928339">
                         是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
                     </label>
@@ -545,7 +542,6 @@
                     </select>
                 </div>
 
-                <!-- 紙本喜帖地址 -->
                 <div id="address-section" class="conditional-field">
                     <label class="form-label mb-2" for="entry.1299100011">
                         收件地址 <span class="eng">ADDRESS</span>
@@ -553,15 +549,13 @@
                     <input type="text" id="entry.1299100011" name="entry.1299100011" class="form-input" placeholder="請填寫含郵遞區號之完整地址">
                 </div>
 
-                <!-- Q9. Email -->
-                <div class="relative mt-8 border-t border-gray-100 pt-8">
+                <div class="relative mt-8">
                     <label class="form-label mb-2" for="entry.1521896031">
                         電子信箱 <span class="eng">EMAIL</span>
                     </label>
-                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" required placeholder="寄送行前通知用">
+                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" placeholder="寄送行前通知用">
                 </div>
 
-                <!-- Q10. 留言給新人 -->
                 <div class="relative mt-8">
                     <label class="form-label mb-2" for="entry.1716942766">
                         有什麼話想跟我們說嗎？ <span class="eng">MESSAGE</span>
@@ -570,65 +564,48 @@
                 </div>
 
                 <div class="pt-10 text-center relative z-20">
-                    <button type="submit" class="btn-submit w-full md:w-auto px-16 py-4 rounded-full font-medium tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg">
-                        送出回函 <span class="font-cormorant ml-2 text-lg italic">Submit</span>
+                    <button type="submit" id="submit-btn" class="btn-submit w-full md:w-auto px-16 py-4 rounded-full font-medium tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg">
+                        <span>送出回函</span> <span class="font-cormorant ml-2 text-lg italic">Submit</span>
                     </button>
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- 頁尾已大幅加長底部空間 (pb-32) -->
-    <footer class="bg-white pt-20 pb-32 mb-16 border-t border-gray-100 text-center relative overflow-hidden">
+    <footer class="bg-white pt-20 pb-48 mb-16 border-t border-gray-100 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none"></div>
         <p class="font-cormorant text-4xl text-gold-gradient italic mb-4 relative z-10">Tiana & William</p>
         <p class="text-xs tracking-[0.3em] text-gray-400 font-serif relative z-10">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
     </footer>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast">
         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
         <span id="toast-message" class="text-sm tracking-wide font-medium"></span>
     </div>
 
     <script>
-        var submitted = false;
-
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('hidden_iframe').onload = function() {
-                if (submitted) {
-                    showToast('回函已成功送出，期待您的到來！');
-                    resetForm();
-                }
-            };
-            
             createStardust();
-            
-            // 初始化隱藏欄位的屬性
-            disableHiddenFields();
+            setupFormSubmit();
         });
 
         function createStardust() {
             const container = document.getElementById('particles');
             const particleCount = 40;
-            
             for (let i = 0; i < particleCount; i++) {
                 let particle = document.createElement('div');
                 particle.classList.add('particle');
-                
                 let posX = Math.random() * 100;
                 let delay = Math.random() * 15;
                 let duration = 10 + Math.random() * 20;
                 let size = Math.random() * 3 + 1;
                 let opacity = Math.random() * 0.6 + 0.2;
-                
                 particle.style.left = posX + 'vw';
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 particle.style.animationDelay = delay + 's';
                 particle.style.animationDuration = duration + 's';
                 particle.style.opacity = opacity;
-                
                 container.appendChild(particle);
             }
         }
@@ -656,21 +633,17 @@
         });
 
         const weddingDate = new Date("Aug 16, 2026 10:00:00").getTime();
-        
         const updateTimer = setInterval(() => {
             const now = new Date().getTime();
             const distance = weddingDate - now;
-            
             if (distance < 0) {
                 clearInterval(updateTimer);
                 document.getElementById("countdown-container").innerHTML = "<p class='text-primary tracking-[0.3em] text-2xl font-serif italic'>就是今天！</p>";
                 return;
             }
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            
             document.getElementById("days").innerText = days.toString().padStart(2, '0');
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
@@ -688,56 +661,34 @@
             }
         }
 
-        /* 核心邏輯修改：隱藏時強制禁用(disabled)，避免送出空白內容導致 Google Form 報錯 */
-        function disableHiddenFields() {
-            document.getElementById('entry.1188616045').disabled = true;
-            document.getElementById('entry.630238932').disabled = true;
-            document.getElementById('entry.1535829381').disabled = true;
-            document.getElementById('entry.1299100011').disabled = true;
-        }
-
         function handleAttendanceChange() {
             const selectElement = document.getElementById('entry.2033180862');
             const attendance = selectElement ? selectElement.value : "";
             const attendingSection = document.getElementById('attending-section');
             const guestSelect = document.getElementById('entry.1188616045');
             const banquetSection = document.getElementById('banquet-section');
-            const babyChairSelect = document.getElementById('entry.630238932');
-            const vegSelect = document.getElementById('entry.1535829381');
             
             if (attendance && attendance.includes('當然，一定到')) {
                 attendingSection.classList.add('active');
-                guestSelect.disabled = false; // 啟用
                 guestSelect.setAttribute('required', 'required');
             } else {
                 attendingSection.classList.remove('active');
                 guestSelect.removeAttribute('required');
                 guestSelect.value = "";
-                guestSelect.disabled = true; // 禁用
                 banquetSection.classList.remove('active');
-                babyChairSelect.value = "0";
-                babyChairSelect.disabled = true;
-                vegSelect.value = "0";
-                vegSelect.disabled = true;
             }
         }
 
         function handleGuestCountChange() {
             const guestCount = document.getElementById('entry.1188616045').value;
             const banquetSection = document.getElementById('banquet-section');
-            const babyChairSelect = document.getElementById('entry.630238932');
-            const vegSelect = document.getElementById('entry.1535829381');
             
             if (guestCount && guestCount !== '0位') {
                 banquetSection.classList.add('active');
-                babyChairSelect.disabled = false; // 啟用
-                vegSelect.disabled = false;       // 啟用
             } else {
                 banquetSection.classList.remove('active');
-                babyChairSelect.value = "0";
-                babyChairSelect.disabled = true;  // 禁用
-                vegSelect.value = "0";
-                vegSelect.disabled = true;        // 禁用
+                document.getElementById('entry.630238932').value = "0";
+                document.getElementById('entry.1535829381').value = "0"; 
             }
         }
 
@@ -749,31 +700,75 @@
             
             if (invType && invType.includes('需要，請寄紙本')) {
                 addressSection.classList.add('active');
-                addressInput.disabled = false; // 啟用
                 addressInput.setAttribute('required', 'required');
             } else {
                 addressSection.classList.remove('active');
                 addressInput.removeAttribute('required');
                 addressInput.value = "";
-                addressInput.disabled = true; // 禁用
             }
         }
 
-        function showToast(message) {
+        function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-message').innerText = message;
+            if(isError) {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 6000);
         }
 
-        function resetForm() {
-            document.getElementById('rsvp-form').reset();
-            handleAttendanceChange(); 
-            handleGuestCountChange();
-            handleInvitationChange();
-            submitted = false;
+        function setupFormSubmit() {
+            const form = document.getElementById('rsvp-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = submitBtn.querySelector('span');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Stop default form navigation
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                const originalText = btnText.innerText;
+                btnText.innerText = '傳送中...';
+
+                // Collect data
+                const formData = new FormData(form);
+                const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSd8zwFKDev_JLWvFSDgRstIqCVZvXrvqvlrIVNyy2IDvl7kKQ/formResponse";
+
+                // Log data to console for debugging
+                console.log("--- Sending Form Data ---");
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+
+                // Send via fetch
+                fetch(googleFormUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Essential for Google Forms
+                    body: formData
+                })
+                .then(() => {
+                    console.log("Fetch request completed (no-cors mode hides actual status, but it sent!).");
+                    showToast('回函已成功送出，期待您的到來！');
+                    form.reset();
+                    handleAttendanceChange(); 
+                    handleGuestCountChange();
+                    handleInvitationChange();
+                })
+                .catch(error => {
+                    console.error("Fetch Error:", error);
+                    showToast('網路錯誤，請稍後再試！', true);
+                })
+                .finally(() => {
+                    // Restore button
+                    submitBtn.disabled = false;
+                    btnText.innerText = originalText;
+                });
+            });
         }
 
         const observerOptions = {
@@ -800,7 +795,6 @@
                 }
             });
         });
-
     </script>
 </body>
 </html>
