@@ -10,13 +10,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --color-primary: #d4a373; /* 暖陽大地色 */
-            --color-secondary: #8da399; /* 莫蘭迪綠 */
+            --color-primary: #d4a373;
+            --color-secondary: #8da399;
             --color-gold-light: #f9e5c9;
             --color-gold: #d4af37;
             --color-gold-dark: #aa7c11;
             --color-bg-center: #ffffff;
-            --color-bg-edge: #fdf5f6; /* 極淡的玫瑰粉 */
+            --color-bg-edge: #fdf5f6;
             --color-text-main: #3d3b38;
             --color-text-muted: #6b6660;
         }
@@ -32,7 +32,6 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* 華麗燙金文字效果 */
         .text-gold-gradient {
             background: linear-gradient(to right, #8a6132, #c59b6d, #8a6132);
             -webkit-background-clip: text;
@@ -42,7 +41,6 @@
             filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.18));
         }
 
-        /* 玻璃毛玻璃效果 */
         .glass-nav {
             background: rgba(253, 245, 246, 0.75);
             backdrop-filter: blur(15px);
@@ -51,7 +49,6 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
         }
 
-        /* 雙層畫框質感設計 */
         .ornate-border {
             position: relative;
         }
@@ -65,7 +62,6 @@
             z-index: 10;
         }
 
-        /* 倒數計時器微光卡片 */
         .timer-card {
             background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(253,245,246,0.9) 100%);
             box-shadow: 
@@ -81,7 +77,6 @@
             box-shadow: 0 20px 40px -5px rgba(212, 163, 115, 0.25);
         }
         
-        /* 古典菱格分隔線 */
         .diamond-divider {
             display: flex;
             align-items: center;
@@ -103,7 +98,6 @@
             opacity: 0.7;
         }
 
-        /* V-Card 設計 */
         .v-card {
             background: #ffffff;
             border-radius: 16px;
@@ -119,7 +113,6 @@
             background: linear-gradient(90deg, #e3c4a8, var(--color-primary), #e3c4a8);
         }
 
-        /* 表單樣式優化 */
         .form-input {
             width: 100%;
             border: none;
@@ -164,7 +157,6 @@
             background-size: 1em;
         }
 
-        /* 隱藏/顯示動畫 */
         .conditional-field {
             max-height: 0;
             opacity: 0;
@@ -172,12 +164,11 @@
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .conditional-field.active {
-            max-height: 600px;
+            max-height: 1500px;
             opacity: 1;
             margin-top: 1.5rem;
         }
 
-        /* 摺疊面板動畫 */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -194,7 +185,6 @@
             white-space: nowrap;
         }
 
-        /* 華麗提交按鈕 */
         .btn-submit {
             background: linear-gradient(135deg, #c59b6d, #d4a373, #c59b6d);
             background-size: 200% auto;
@@ -212,7 +202,6 @@
         .bg-primary { background-color: var(--color-primary); }
         .border-primary { border-color: var(--color-primary); }
 
-        /* 載入與星塵動畫 */
         .fade-in { animation: fadeIn 1.5s ease-out forwards; opacity: 0; }
         .slide-up { animation: slideUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; opacity: 0; transform: translateY(40px); }
         
@@ -223,7 +212,6 @@
         @keyframes fadeIn { to { opacity: 1; } }
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* 漂浮星塵特效 */
         .stardust-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -246,7 +234,6 @@
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* 提示框 */
         .toast {
             position: fixed;
             bottom: -100px;
@@ -302,18 +289,14 @@
     </nav>
 
     <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Image with vignette overlay -->
         <div class="absolute inset-0 w-full h-full">
             <div class="absolute inset-0 bg-black/40 z-10"></div>
-            <!-- 加深四周邊角，凸顯中央人物 -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 z-10"></div>
             <img src="https://i.postimg.cc/QtSC0mKx/IMG-1695.jpg" alt="Tiana & William" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/1920x1080/e5e0d8/8da399?text=Tiana+%26+William'">
         </div>
         
-        <!-- 星塵動畫特效區塊 -->
         <div class="stardust-container" id="particles"></div>
 
-        <!-- Content -->
         <div class="relative z-20 text-center text-white px-4 mt-16 fade-in">
             <p class="font-cormorant text-xl md:text-2xl tracking-[0.4em] mb-6 text-white/80 uppercase">We are getting married</p>
             <h1 class="font-cormorant text-7xl md:text-8xl lg:text-9xl mb-4 font-light italic text-gold-gradient leading-tight">Tiana & William</h1>
@@ -330,7 +313,6 @@
             </a>
         </div>
         
-        <!-- Scroll Down Indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
             <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -346,7 +328,6 @@
             </div>
             
             <div class="flex justify-center items-center gap-3 md:gap-8" id="countdown-container">
-                <!-- Days -->
                 <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
                     <span id="days" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
                     <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">DAYS</span>
@@ -354,7 +335,6 @@
                 
                 <div class="w-px h-20 md:h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
                 
-                <!-- Hours -->
                 <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
                     <span id="hours" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
                     <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">HRS</span>
@@ -362,7 +342,6 @@
                 
                 <div class="w-px h-20 md:h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
                 
-                <!-- Minutes -->
                 <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
                     <span id="minutes" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
                     <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">MINS</span>
@@ -383,9 +362,7 @@
             </div>
 
             <div class="v-card ornate-border p-10 md:p-16 slide-up delay-100">
-                <!-- Info Blocks -->
                 <div class="space-y-12">
-                    <!-- Date & Time -->
                     <div class="text-center">
                         <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -399,7 +376,6 @@
                         <div class="w-3/4 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
                     </div>
 
-                    <!-- Location & Accordion -->
                     <div class="text-center">
                         <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -407,7 +383,6 @@
                         <h3 class="text-xl font-semibold tracking-widest mb-2 nowrap text-text-main">台北漢來飯店</h3>
                         <p class="text-gray-500 text-base tracking-widest mb-8 nowrap">三樓 鉑金A廳</p>
 
-                        <!-- Accordion for Transportation -->
                         <div class="text-left mt-8 border border-primary/20 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                             <button class="accordion-toggle w-full px-6 py-5 flex justify-between items-center bg-gray-50/50 hover:bg-primary/5 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
                                 <span class="font-semibold tracking-widest text-text-main flex items-center gap-3">
@@ -420,7 +395,7 @@
                                 <div class="p-6 text-sm text-gray-600 leading-relaxed space-y-5 border-t border-gray-100 bg-white">
                                     <div>
                                         <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                             開車前往
                                         </p>
                                         <p class="pl-6 text-gray-500">導航至 <span class="nowrap font-medium text-text-main">台北市南港區經貿一路168號</span>，飯店備有地下停車場，賓客可享免費停車。</p>
@@ -461,7 +436,6 @@
                   id="rsvp-form"
                   class="v-card ornate-border p-8 md:p-14 space-y-10">
 
-                <!-- Q1. 姓名 -->
                 <div class="relative pt-2">
                     <label class="form-label mb-2" for="entry.2047345391">
                         賓客姓名 <span class="eng">NAME</span>
@@ -469,7 +443,6 @@
                     <input type="text" id="entry.2047345391" name="entry.2047345391" class="form-input" required placeholder="請輸入全名">
                 </div>
 
-                <!-- Q2. 聯絡電話 -->
                 <div class="relative">
                     <label class="form-label mb-2" for="entry.1766251007">
                         聯絡電話 <span class="eng">PHONE</span>
@@ -477,20 +450,19 @@
                     <input type="tel" id="entry.1766251007" name="entry.1766251007" class="form-input" required placeholder="例如：0912345678">
                 </div>
 
-                <!-- Q3. 您是誰的親友 -->
                 <div class="relative">
                     <label class="form-label mb-2" for="entry.1339287923">
                         您是哪方的親友 <span class="eng">RELATION</span>
                     </label>
+                    <!-- 注意：這裡的 value 必須與 Google 表單設定完全一樣！ -->
                     <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
-                        <option value="男方親友">男方親友</option>
-                        <option value="女方親友">女方親友</option>
+                        <option value="男方親友">男方親友</option> <!-- 若男方也有雙語，請自行改成 value="威廉的親友 William's friend" -->
+                        <option value="孟庭的親友 Tiana's friend">女方親友</option>
                         <option value="共同親友">共同親友</option>
                     </select>
                 </div>
 
-                <!-- Q4. 關係 -->
                 <div class="relative">
                     <label class="form-label mb-2" for="entry.1136405841">
                         與新人的關係 <span class="eng">CONNECTION</span>
@@ -504,20 +476,20 @@
                     </select>
                 </div>
 
-                <!-- Q5. 是否出席 -->
                 <div class="relative">
                     <label class="form-label mb-2" for="entry.1336036681">
                         是否能撥空參與 <span class="eng">ATTENDANCE</span>
                     </label>
+                    <!-- 注意：這裡的 value 也已經與您提供的網址對齊 -->
                     <select id="entry.1336036681" name="entry.1336036681" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
                         <option value="" disabled selected>請選擇</option>
-                        <option value="當然，一定到!">當然，一定到!</option>
-                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option>
+                        <option value="當然，一定到! Yes, I am delighted to attend">當然，一定到!</option>
+                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option> <!-- 如果這題有雙語，請去後台檢查並把 value 改對 -->
                     </select>
                 </div>
 
                 <!-- 動態顯示區塊 (僅出席者填寫) -->
-                <div id="attending-section" class="conditional-field space-y-10 border-t border-gray-100 pt-8 mt-4">
+                <div id="attending-section" class="conditional-field border-t border-gray-100 pt-8 mt-4">
                     
                     <!-- Q6. 參加人數 -->
                     <div class="relative">
@@ -535,63 +507,73 @@
                         </select>
                     </div>
 
-                    <!-- 進階動態區塊 (午宴人數 > 0 顯示) -->
-                    <div id="banquet-section" class="conditional-field space-y-8 bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner">
-                        <!-- Q7. 兒童椅 -->
-                        <div class="relative">
-                            <label class="form-label mb-2" for="entry.630238932">
-                                是否需要兒童椅 <span class="eng">BABY CHAIR</span>
-                            </label>
-                            <select id="entry.630238932" name="entry.630238932" class="form-input bg-transparent border-gray-200">
-                                <option value="0" selected>不需要</option>
-                                <option value="1">1 張</option>
-                                <option value="2">2 張</option>
-                                <option value="3">3 張</option>
-                            </select>
+                    <!-- 進階動態區塊 (午宴人數 > 0 顯示兒童椅與素食) -->
+                    <div id="banquet-section" class="conditional-field bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner">
+                        <div class="space-y-6">
+                            <!-- Q7. 兒童椅 -->
+                            <div class="relative">
+                                <label class="form-label mb-2" for="entry.630238932">
+                                    是否需要兒童椅 <span class="eng">BABY CHAIR</span>
+                                </label>
+                                <select id="entry.630238932" name="entry.630238932" class="form-input bg-transparent border-gray-200">
+                                    <option value="0" selected>不需要</option>
+                                    <option value="1">1 張</option>
+                                    <option value="2">2 張</option>
+                                    <option value="3">3 張</option>
+                                </select>
+                            </div>
+
+                            <!-- Q8. 素食人數 (移入至人數區塊內) -->
+                            <div class="relative">
+                                <label class="form-label mb-2" for="entry.1535829381">
+                                    需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
+                                </label>
+                                <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent border-gray-200">
+                                    <option value="0" selected>無</option>
+                                    <option value="1">1 位</option>
+                                    <option value="2">2 位</option>
+                                    <option value="3">3 位</option>
+                                    <option value="4">4 位以上</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <!-- Q8. 素食人數 -->
-                        <div class="relative">
-                            <label class="form-label mb-2" for="entry.1535829381">
-                                需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
-                            </label>
-                            <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent border-gray-200">
-                                <option value="0" selected>無</option>
-                                <option value="1">1 位</option>
-                                <option value="2">2 位</option>
-                                <option value="3">3 位</option>
-                                <option value="4">4 位以上</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Q9. 喜帖需求 -->
-                    <div class="relative mt-8">
-                        <label class="form-label mb-2" for="entry.2080928339">
-                            是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
-                        </label>
-                        <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
-                            <option value="" disabled selected>請選擇</option>
-                            <option value="需要，請寄紙本喜帖給我">需要，請寄紙本喜帖給我</option>
-                            <option value="不需要，響應環保，電子喜帖即可">不需要，響應環保，電子喜帖即可</option>
-                        </select>
-                    </div>
-
-                    <!-- 紙本喜帖地址 (動態顯示) -->
-                    <div id="address-section" class="conditional-field">
-                        <label class="form-label mb-2" for="entry.1299100011">
-                            收件地址 <span class="eng">ADDRESS</span>
-                        </label>
-                        <input type="text" id="entry.1299100011" name="entry.1299100011" class="form-input" placeholder="請填寫含郵遞區號之完整地址">
                     </div>
                 </div>
 
-                <!-- Q10. Email (通用) -->
+                <!-- Q9. 喜帖需求 -->
+                <div class="relative mt-8">
+                    <label class="form-label mb-2" for="entry.2080928339">
+                        是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
+                    </label>
+                    <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
+                        <option value="" disabled selected>請選擇</option>
+                        <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option>
+                        <option value="不需要，響應環保，電子喜帖即可">不需要，響應環保，電子喜帖即可</option> <!-- 如果這題也有雙語，請記得改 value -->
+                    </select>
+                </div>
+
+                <!-- 紙本喜帖地址 -->
+                <div id="address-section" class="conditional-field">
+                    <label class="form-label mb-2" for="entry.1299100011">
+                        收件地址 <span class="eng">ADDRESS</span>
+                    </label>
+                    <input type="text" id="entry.1299100011" name="entry.1299100011" class="form-input" placeholder="請填寫含郵遞區號之完整地址">
+                </div>
+
+                <!-- Q10. Email -->
                 <div class="relative mt-8">
                     <label class="form-label mb-2" for="entry.1521896031">
                         電子信箱 <span class="eng">EMAIL</span>
                     </label>
                     <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" placeholder="寄送行前通知用">
+                </div>
+
+                <!-- Q11. 留言給新人 -->
+                <div class="relative mt-8">
+                    <label class="form-label mb-2" for="entry.1716942766">
+                        有什麼話想跟我們說嗎？ <span class="eng">MESSAGE</span>
+                    </label>
+                    <textarea id="entry.1716942766" name="entry.1716942766" class="form-input resize-none h-24" required placeholder="寫下給新人的祝福..."></textarea>
                 </div>
 
                 <div class="pt-10 text-center relative z-20">
@@ -616,10 +598,8 @@
     </div>
 
     <script>
-        // Global variable for form submission tracking
         var submitted = false;
 
-        // Ensure variables and dom are loaded before handling iframe
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('hidden_iframe').onload = function() {
                 if (submitted) {
@@ -628,7 +608,6 @@
                 }
             };
             
-            // 產生封面星塵特效
             createStardust();
         });
 
@@ -640,7 +619,6 @@
                 let particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // 隨機位置、大小、動畫延遲與持續時間
                 let posX = Math.random() * 100;
                 let delay = Math.random() * 15;
                 let duration = 10 + Math.random() * 20;
@@ -658,7 +636,6 @@
             }
         }
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -670,7 +647,6 @@
             }
         });
 
-        // Mobile Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileBtn.addEventListener('click', () => {
@@ -682,7 +658,6 @@
             });
         });
 
-        // Countdown Timer Logic
         const weddingDate = new Date("Aug 16, 2026 10:00:00").getTime();
         
         const updateTimer = setInterval(() => {
@@ -704,7 +679,6 @@
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
         }, 1000);
 
-        // Accordion Logic
         function toggleAccordion(button) {
             button.classList.toggle('active');
             const content = button.nextElementSibling;
@@ -717,14 +691,13 @@
             }
         }
 
-        // Form Logic - Conditional Rendering
         function handleAttendanceChange() {
             const attendance = document.getElementById('entry.1336036681').value;
             const attendingSection = document.getElementById('attending-section');
             const guestSelect = document.getElementById('entry.1188616045');
             const banquetSection = document.getElementById('banquet-section');
             
-            if (attendance === '當然，一定到!') {
+            if (attendance.includes('當然，一定到')) {
                 attendingSection.classList.add('active');
                 guestSelect.setAttribute('required', 'required');
             } else {
@@ -732,8 +705,6 @@
                 guestSelect.removeAttribute('required');
                 guestSelect.value = "";
                 banquetSection.classList.remove('active');
-                document.getElementById('entry.2080928339').value = "";
-                handleInvitationChange(); 
             }
         }
 
@@ -746,7 +717,7 @@
             } else {
                 banquetSection.classList.remove('active');
                 document.getElementById('entry.630238932').value = "0";
-                document.getElementById('entry.1535829381').value = "0";
+                document.getElementById('entry.1535829381').value = "0"; // 重置素食人數
             }
         }
 
@@ -765,7 +736,6 @@
             }
         }
 
-        // Toast Notification Function
         function showToast(message) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-message').innerText = message;
@@ -775,14 +745,12 @@
             }, 6000);
         }
 
-        // Reset Form
         function resetForm() {
             document.getElementById('rsvp-form').reset();
             handleAttendanceChange(); 
             submitted = false;
         }
 
-        // Intersection Observer for Scroll Animations
         const observerOptions = {
             root: null,
             rootMargin: '0px',
