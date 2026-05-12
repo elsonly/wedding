@@ -436,7 +436,6 @@
                 <p class="text-xs text-gray-400 font-sans tracking-wide">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
             </div>
 
-            <!-- Removed hidden iframe, using Fetch API -->
             <form id="rsvp-form" class="v-card ornate-border p-8 md:p-14 space-y-10">
 
                 <div class="relative pt-2">
@@ -452,9 +451,8 @@
                     </label>
                     <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
-                        <option value="男方親友">男方親友</option> 
+                        <option value="文豪的親友 William's friend">男方親友</option> 
                         <option value="孟庭的親友 Tiana's friend">女方親友</option>
-                        <option value="共同親友">共同親友</option>
                     </select>
                 </div>
 
@@ -467,7 +465,6 @@
                         <option value="親戚">親戚</option>
                         <option value="朋友">朋友</option>
                         <option value="同事">同事</option>
-                        <option value="同學">同學</option>
                     </select>
                 </div>
 
@@ -478,7 +475,7 @@
                     <select id="entry.2033180862" name="entry.2033180862" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="當然，一定到! Yes, I am delighted to attend">當然，一定到!</option>
-                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option>
+                        <option value="無法參加，但我想留下給你們的祝福 Sorry to miss out">無法到場，給予滿滿祝福</option>
                     </select>
                 </div>
 
@@ -495,8 +492,8 @@
                             <option value="1位">1位</option>
                             <option value="2位">2位</option>
                             <option value="3位">3位</option>
-                            <option value="4位">4位</option>
-                            <option value="5位以上">5位以上 (我們將與您聯繫確認)</option>
+                            <option value="4位" data-google-other-response="4位">4位</option>
+                            <option value="5位以上" data-google-other-response="5位以上">5位以上 (我們將與您聯繫確認)</option>
                         </select>
                     </div>
 
@@ -511,7 +508,7 @@
                                     <option value="0" selected>不需要</option>
                                     <option value="1">1 張</option>
                                     <option value="2">2 張</option>
-                                    <option value="3">3 張</option>
+                                    <option value="3" data-google-other-response="3">3 張</option>
                                 </select>
                             </div>
 
@@ -524,7 +521,7 @@
                                     <option value="1">1 位</option>
                                     <option value="2">2 位</option>
                                     <option value="3">3 位</option>
-                                    <option value="4">4 位以上</option>
+                                    <option value="4" data-google-other-response="4">4 位以上</option>
                                 </select>
                             </div>
                         </div>
@@ -539,6 +536,7 @@
                         <option value="" disabled selected>請選擇</option>
                         <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option>
                         <option value="需要，請寄電子喜帖給我 Yes, I need digital wedding invitation">需要，請寄電子喜帖給我</option>
+                        <option value="不用，我已經記起來婚禮資訊了No, I already remembered the wedding information">不用，我已經記起來婚禮資訊了</option>
                     </select>
                 </div>
 
@@ -676,6 +674,8 @@
                 guestSelect.removeAttribute('required');
                 guestSelect.value = "";
                 banquetSection.classList.remove('active');
+                document.getElementById('entry.630238932').value = "0";
+                document.getElementById('entry.1535829381').value = "0";
             }
         }
 
@@ -736,12 +736,12 @@
                 btnText.innerText = '傳送中...';
 
                 // Collect data
-                const formData = new FormData(form);
+                const requestBody = buildGoogleFormData(form);
                 const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSd8zwFKDev_JLWvFSDgRstIqCVZvXrvqvlrIVNyy2IDvl7kKQ/formResponse";
 
                 // Log data to console for debugging
                 console.log("--- Sending Form Data ---");
-                for (let [key, value] of formData.entries()) {
+                for (let [key, value] of requestBody.entries()) {
                     console.log(`${key}: ${value}`);
                 }
 
@@ -749,7 +749,7 @@
                 fetch(googleFormUrl, {
                     method: 'POST',
                     mode: 'no-cors', // Essential for Google Forms
-                    body: formData
+                    body: requestBody
                 })
                 .then(() => {
                     console.log("Fetch request completed (no-cors mode hides actual status, but it sent!).");
@@ -769,6 +769,34 @@
                     btnText.innerText = originalText;
                 });
             });
+        }
+
+        function buildGoogleFormData(form) {
+            const formData = new FormData(form);
+            applyGoogleFormOtherOptions(form, formData);
+            appendGoogleFormMetadata(formData);
+            return new URLSearchParams(formData);
+        }
+
+        function applyGoogleFormOtherOptions(form, formData) {
+            form.querySelectorAll('select[name]').forEach(select => {
+                const selectedOption = select.selectedOptions[0];
+                if (!selectedOption || !Object.prototype.hasOwnProperty.call(selectedOption.dataset, 'googleOtherResponse')) {
+                    return;
+                }
+
+                formData.set(select.name, '__other_option__');
+                formData.set(`${select.name}.other_option_response`, selectedOption.dataset.googleOtherResponse);
+            });
+        }
+
+        function appendGoogleFormMetadata(formData) {
+            if (!formData.has('fvv')) {
+                formData.append('fvv', '1');
+            }
+            if (!formData.has('pageHistory')) {
+                formData.append('pageHistory', '0');
+            }
         }
 
         const observerOptions = {
