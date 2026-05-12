@@ -460,7 +460,7 @@
                     </label>
                     <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
-                        <option value="威廉的親友 William's friend">男方親友</option> 
+                        <option value="男方親友">男方親友</option> <!-- ⚠️ 若表單有英文，請改成如: 威廉的親友 William's friend -->
                         <option value="孟庭的親友 Tiana's friend">女方親友</option>
                         <option value="共同親友">共同親友</option>
                     </select>
@@ -486,7 +486,7 @@
                     <select id="entry.1336036681" name="entry.1336036681" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="當然，一定到! Yes, I am delighted to attend">當然，一定到!</option>
-                        <option value="無法到場，給予滿滿祝福 No, I can't make it">無法到場，給予滿滿祝福</option> 
+                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option> <!-- ⚠️ 若表單有英文，請務必補上 -->
                     </select>
                 </div>
 
@@ -531,15 +531,15 @@
                 </div>
 
                 <div class="relative mt-8">
-                    <label class="form-label mb-2" for="entry.1535829381">
-                        需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
+                <!-- Q9. 喜帖需求 -->
+                <div class="relative mt-8">
+                    <label class="form-label mb-2" for="entry.2080928339">
+                        是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
                     </label>
-                    <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent border-gray-200">
-                        <option value="0" selected>無</option>
-                        <option value="1">1 位</option>
-                        <option value="2">2 位</option>
-                        <option value="3">3 位</option>
-                        <option value="4">4 位以上</option>
+                    <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
+                        <option value="" disabled selected>請選擇</option>
+                        <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option> <!-- 已精確對齊您的兩個空格 -->
+                        <option value="不需要，響應環保，電子喜帖即可">不需要，響應環保，電子喜帖即可</option> <!-- ⚠️ 若表單有英文，請務必補上 -->
                     </select>
                 </div>
 
