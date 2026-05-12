@@ -12,14 +12,18 @@
         :root {
             --color-primary: #d4a373; /* 暖陽大地色 */
             --color-secondary: #8da399; /* 莫蘭迪綠 */
-            --color-bg: #faf9f6; /* 珍珠白背景 */
+            --color-gold-light: #f9e5c9;
+            --color-gold: #d4af37;
+            --color-gold-dark: #aa7c11;
+            --color-bg-center: #ffffff;
+            --color-bg-edge: #fdf5f6; /* 極淡的玫瑰粉 */
             --color-text-main: #3d3b38;
             --color-text-muted: #6b6660;
         }
 
         body {
             font-family: 'Noto Serif TC', serif;
-            background-color: var(--color-bg);
+            background: radial-gradient(circle at top center, var(--color-bg-center) 0%, var(--color-bg-edge) 100%);
             color: var(--color-text-main);
             overflow-x: hidden;
         }
@@ -28,47 +32,91 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
+        /* 華麗燙金文字效果 */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #8a6132, #c59b6d, #8a6132);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.18));
+        }
+
         /* 玻璃毛玻璃效果 */
         .glass-nav {
-            background: rgba(250, 249, 246, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 163, 115, 0.1);
+            background: rgba(253, 245, 246, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 163, 115, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        /* 雙層畫框質感設計 */
+        .ornate-border {
+            position: relative;
+        }
+        .ornate-border::after {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 10;
         }
 
         /* 倒數計時器微光卡片 */
         .timer-card {
-            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,249,246,0.9) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(253,245,246,0.9) 100%);
             box-shadow: 
-                0 10px 25px -5px rgba(212, 163, 115, 0.15), 
-                0 4px 10px -5px rgba(141, 163, 153, 0.1),
-                inset 0 0 0 1px rgba(255,255,255,0.8);
-            border-radius: 16px;
-            transition: transform 0.3s ease;
+                0 15px 35px -5px rgba(212, 163, 115, 0.2), 
+                0 5px 15px -5px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(255,255,255,0.9);
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
         .timer-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px -5px rgba(212, 163, 115, 0.25);
         }
         
-        .timer-divider {
-            width: 1px;
-            background: linear-gradient(to bottom, rgba(212, 163, 115, 0), rgba(212, 163, 115, 0.3), rgba(212, 163, 115, 0));
+        /* 古典菱格分隔線 */
+        .diamond-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .diamond-divider::before, .diamond-divider::after {
+            content: '';
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.5), transparent);
+        }
+        .diamond-divider .diamond {
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-primary);
+            transform: rotate(45deg);
+            margin: 0 12px;
+            opacity: 0.7;
         }
 
         /* V-Card 設計 */
         .v-card {
             background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.05);
-            border: 1px solid rgba(212, 163, 115, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px -10px rgba(212, 163, 115, 0.15);
+            border: 1px solid rgba(212, 163, 115, 0.15);
             position: relative;
             overflow: hidden;
         }
         .v-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, #e3c4a8, var(--color-primary), #e3c4a8);
         }
 
         /* 表單樣式優化 */
@@ -101,7 +149,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.8rem;
             letter-spacing: 0.05em;
-            color: #9ca3af;
+            color: #b0a89f;
         }
         .form-input:focus + .form-label,
         .form-input:not(:placeholder-shown) + .form-label {
@@ -121,10 +169,10 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .conditional-field.active {
-            max-height: 500px;
+            max-height: 600px;
             opacity: 1;
             margin-top: 1.5rem;
         }
@@ -133,38 +181,40 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+        .accordion-content.open {
+            transition: max-height 0.5s ease-in-out;
         }
         .accordion-toggle.active .icon-plus {
             transform: rotate(45deg);
         }
 
-        /* 確保重要名詞不斷行 */
         .nowrap {
             white-space: nowrap;
         }
 
-        /* 提交按鈕 */
+        /* 華麗提交按鈕 */
         .btn-submit {
-            background: linear-gradient(135deg, var(--color-primary), #bfa283);
+            background: linear-gradient(135deg, #c59b6d, #d4a373, #c59b6d);
+            background-size: 200% auto;
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px -5px rgba(212, 163, 115, 0.4);
         }
         .btn-submit:hover {
-            box-shadow: 0 10px 20px -10px var(--color-primary);
-            transform: translateY(-1px);
+            background-position: right center;
+            box-shadow: 0 15px 25px -5px rgba(212, 163, 115, 0.6);
+            transform: translateY(-2px);
         }
 
-        /* 自定義顏色 Tailwind classes */
         .text-primary { color: var(--color-primary); }
-        .text-secondary { color: var(--color-secondary); }
         .bg-primary { background-color: var(--color-primary); }
-        .bg-secondary { background-color: var(--color-secondary); }
         .border-primary { border-color: var(--color-primary); }
 
-        /* 載入動畫 */
-        .fade-in { animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
-        .slide-up { animation: slideUp 1s ease-out forwards; opacity: 0; transform: translateY(30px); }
+        /* 載入與星塵動畫 */
+        .fade-in { animation: fadeIn 1.5s ease-out forwards; opacity: 0; }
+        .slide-up { animation: slideUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; opacity: 0; transform: translateY(40px); }
         
         .delay-100 { animation-delay: 0.1s; }
         .delay-300 { animation-delay: 0.3s; }
@@ -173,25 +223,48 @@
         @keyframes fadeIn { to { opacity: 1; } }
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
+        /* 漂浮星塵特效 */
+        .stardust-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 15;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            background-color: rgba(255, 235, 190, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(255, 235, 190, 0.4);
+            animation: float-up linear infinite;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
         /* 提示框 */
         .toast {
             position: fixed;
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--color-primary);
+            background: linear-gradient(135deg, #c59b6d, #d4a373);
             color: white;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.4);
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 100;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .toast.show {
-            bottom: 30px;
+            bottom: 40px;
         }
     </style>
 </head>
@@ -199,158 +272,165 @@
 
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="font-cormorant text-2xl tracking-widest text-primary italic font-semibold">T & W</a>
+                    <a href="#" class="font-cormorant text-3xl tracking-widest text-gold-gradient italic font-semibold">T & W</a>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors text-sm tracking-widest">關於我們</a>
-                    <a href="#details" class="text-gray-600 hover:text-primary transition-colors text-sm tracking-widest">婚禮詳情</a>
-                    <a href="#rsvp" class="text-primary font-semibold border-b-2 border-primary pb-1 text-sm tracking-widest">出席回函</a>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#about" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">關於我們</a>
+                    <a href="#details" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">婚禮詳情</a>
+                    <a href="#rsvp" class="text-primary font-semibold border-b-2 border-primary pb-1 text-sm tracking-widest shadow-sm">出席回函</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <button id="mobile-menu-btn" class="text-primary focus:outline-none p-2">
+                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-md absolute w-full border-b border-gray-100 shadow-sm">
-            <div class="px-4 pt-2 pb-6 space-y-1 text-center">
-                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md">關於我們</a>
-                <a href="#details" class="block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md">婚禮詳情</a>
+        <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-xl absolute w-full border-b border-gray-100 shadow-xl">
+            <div class="px-4 pt-4 pb-8 space-y-2 text-center">
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-500 hover:text-primary rounded-md">關於我們</a>
+                <a href="#details" class="block px-3 py-3 text-base font-medium text-gray-500 hover:text-primary rounded-md">婚禮詳情</a>
                 <a href="#rsvp" class="block px-3 py-3 text-base font-medium text-primary bg-primary/5 rounded-md">出席回函</a>
             </div>
         </div>
     </nav>
 
     <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Image -->
+        <!-- Background Image with vignette overlay -->
         <div class="absolute inset-0 w-full h-full">
-            <div class="absolute inset-0 bg-black/30 z-10"></div> <!-- Overlay -->
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <!-- 加深四周邊角，凸顯中央人物 -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 z-10"></div>
             <img src="https://i.postimg.cc/QtSC0mKx/IMG-1695.jpg" alt="Tiana & William" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/1920x1080/e5e0d8/8da399?text=Tiana+%26+William'">
         </div>
         
+        <!-- 星塵動畫特效區塊 -->
+        <div class="stardust-container" id="particles"></div>
+
         <!-- Content -->
         <div class="relative z-20 text-center text-white px-4 mt-16 fade-in">
-            <p class="font-cormorant text-xl md:text-2xl tracking-[0.3em] mb-4 text-white/90">WE ARE GETTING MARRIED</p>
-            <h1 class="font-cormorant text-6xl md:text-8xl lg:text-9xl mb-6 font-light italic drop-shadow-lg">Tiana & William</h1>
-            <div class="w-16 h-px bg-white/70 mx-auto mb-6"></div>
-            <p class="text-xl md:text-2xl tracking-[0.2em] font-light mb-8 font-serif">愛在西元前</p>
-            <p class="font-cormorant text-2xl md:text-3xl tracking-widest drop-shadow-md">2026 . 08 . 16</p>
+            <p class="font-cormorant text-xl md:text-2xl tracking-[0.4em] mb-6 text-white/80 uppercase">We are getting married</p>
+            <h1 class="font-cormorant text-7xl md:text-8xl lg:text-9xl mb-4 font-light italic text-gold-gradient leading-tight">Tiana & William</h1>
             
-            <a href="#rsvp" class="inline-block mt-12 px-8 py-3 border border-white/70 rounded-full text-sm tracking-widest hover:bg-white hover:text-primary transition-all duration-300">
+            <div class="diamond-divider">
+                <div class="diamond bg-white/70"></div>
+            </div>
+            
+            <p class="text-xl md:text-3xl tracking-[0.3em] font-light mb-8 font-serif drop-shadow-md text-white/95">愛在西元前</p>
+            <p class="font-cormorant text-3xl md:text-4xl tracking-widest drop-shadow-lg text-white font-medium">2026 08 16</p>
+            
+            <a href="#rsvp" class="inline-block mt-16 px-10 py-4 border border-white/50 rounded-full text-sm tracking-[0.2em] uppercase hover:bg-white/10 hover:border-white transition-all duration-500 backdrop-blur-sm">
                 RSVP
             </a>
         </div>
         
         <!-- Scroll Down Indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
     </header>
 
-    <section class="py-20 bg-bg relative z-10" id="timer-section">
+    <section class="py-24 relative z-10" id="timer-section">
         <div class="max-w-4xl mx-auto px-4 text-center slide-up">
-            <h2 class="font-cormorant text-3xl md:text-4xl text-primary italic mb-2">Countdown</h2>
-            <p class="text-sm tracking-widest text-gray-500 mb-12">距離我們的大日子還有</p>
+            <h2 class="font-cormorant text-4xl md:text-5xl text-gold-gradient italic mb-3">Countdown</h2>
+            <div class="diamond-divider mb-12">
+                <div class="diamond"></div>
+            </div>
             
-            <div class="flex justify-center items-center gap-2 md:gap-6" id="countdown-container">
+            <div class="flex justify-center items-center gap-3 md:gap-8" id="countdown-container">
                 <!-- Days -->
-                <div class="timer-card w-20 md:w-32 py-6 px-2 md:px-4 flex flex-col items-center justify-center">
-                    <span id="days" class="font-cormorant text-4xl md:text-6xl font-semibold text-text-main mb-1">00</span>
-                    <span class="text-xs md:text-sm tracking-widest text-text-muted">DAYS</span>
+                <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
+                    <span id="days" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
+                    <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">DAYS</span>
                 </div>
                 
-                <div class="timer-divider h-16 md:h-24"></div>
+                <div class="w-px h-20 md:h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
                 
                 <!-- Hours -->
-                <div class="timer-card w-20 md:w-32 py-6 px-2 md:px-4 flex flex-col items-center justify-center">
-                    <span id="hours" class="font-cormorant text-4xl md:text-6xl font-semibold text-text-main mb-1">00</span>
-                    <span class="text-xs md:text-sm tracking-widest text-text-muted">HRS</span>
+                <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
+                    <span id="hours" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
+                    <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">HRS</span>
                 </div>
                 
-                <div class="timer-divider h-16 md:h-24"></div>
+                <div class="w-px h-20 md:h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
                 
                 <!-- Minutes -->
-                <div class="timer-card w-20 md:w-32 py-6 px-2 md:px-4 flex flex-col items-center justify-center">
-                    <span id="minutes" class="font-cormorant text-4xl md:text-6xl font-semibold text-text-main mb-1">00</span>
-                    <span class="text-xs md:text-sm tracking-widest text-text-muted">MINS</span>
+                <div class="timer-card ornate-border w-24 md:w-36 py-8 px-2 md:px-4 flex flex-col items-center justify-center">
+                    <span id="minutes" class="font-cormorant text-5xl md:text-7xl font-semibold text-text-main mb-2">00</span>
+                    <span class="text-xs md:text-sm tracking-[0.2em] text-text-muted font-medium">MINS</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="details" class="py-16 md:py-24 bg-[#f4f2ee] relative">
-        <div class="max-w-3xl mx-auto px-4 md:px-6">
+    <section id="details" class="py-20 relative">
+        <div class="w-[80%] mx-auto max-w-5xl">
             
-            <div class="text-center mb-12 slide-up">
-                <h2 class="font-cormorant text-4xl md:text-5xl text-primary italic mb-3">The Details</h2>
-                <div class="w-12 h-px bg-primary mx-auto mb-3"></div>
-                <p class="tracking-widest text-gray-500 text-sm">婚禮資訊</p>
+            <div class="text-center mb-16 slide-up">
+                <h2 class="font-cormorant text-5xl md:text-6xl text-gold-gradient italic mb-4">The Details</h2>
+                <div class="diamond-divider mb-4">
+                    <div class="diamond"></div>
+                </div>
+                <p class="tracking-[0.2em] text-gray-500 text-sm uppercase">婚禮資訊</p>
             </div>
 
-            <div class="v-card p-8 md:p-12 slide-up delay-100">
+            <div class="v-card ornate-border p-10 md:p-16 slide-up delay-100">
                 <!-- Info Blocks -->
-                <div class="space-y-10">
+                <div class="space-y-12">
                     <!-- Date & Time -->
                     <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h3 class="text-lg font-semibold tracking-wider mb-2">二零二六年 八月十六日</h3>
-                        <p class="font-cormorant text-xl text-gray-600 mb-1">August 16, 2026 (Sunday)</p>
-                        <p class="text-gray-500 text-sm tracking-wide mt-2">10:00 證婚儀式 / 12:00 午宴入席</p>
+                        <h3 class="text-xl font-semibold tracking-widest mb-3 text-text-main">2026 08 16</h3>
+                        <p class="font-cormorant text-2xl text-gray-600 mb-2 italic">August 16, 2026 (Sunday)</p>
+                        <p class="text-gray-500 text-sm tracking-[0.1em] mt-3">10:00 證婚儀式 &nbsp;|&nbsp; 12:00 午宴入席</p>
                     </div>
 
-                    <div class="w-full h-px bg-gray-100"></div>
-
-                    <!-- Dress Code -->
-                    <div class="text-center">
-                         <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold tracking-wider mb-2">Dress Code</h3>
-                        <p class="text-gray-600 tracking-wide">邀請您穿著包含 <span class="font-semibold text-[#e8b4b8] bg-[#e8b4b8]/10 px-2 py-1 rounded">淡粉色</span> 元素的服裝<br>與我們一起沉浸在浪漫氛圍中</p>
+                    <div class="w-full flex justify-center">
+                        <div class="w-3/4 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
                     </div>
-
-                    <div class="w-full h-px bg-gray-100"></div>
 
                     <!-- Location & Accordion -->
                     <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <h3 class="text-lg font-semibold tracking-wider mb-2 nowrap">台北寒舍艾美酒店</h3>
-                        <p class="text-gray-500 text-sm tracking-wide mb-6 nowrap">3F 琥珀廳</p>
+                        <h3 class="text-xl font-semibold tracking-widest mb-2 nowrap text-text-main">台北漢來飯店</h3>
+                        <p class="text-gray-500 text-base tracking-widest mb-8 nowrap">三樓 鉑金A廳</p>
 
                         <!-- Accordion for Transportation -->
-                        <div class="text-left mt-6 border border-gray-100 rounded-xl overflow-hidden bg-gray-50/50">
-                            <button class="accordion-toggle w-full px-5 py-4 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
-                                <span class="font-medium tracking-wider text-gray-700">交通指引 <span class="font-cormorant text-gray-400 text-sm ml-1">Transportation</span></span>
-                                <svg class="icon-plus w-5 h-5 text-primary transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        <div class="text-left mt-8 border border-primary/20 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <button class="accordion-toggle w-full px-6 py-5 flex justify-between items-center bg-gray-50/50 hover:bg-primary/5 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                                <span class="font-semibold tracking-widest text-text-main flex items-center gap-3">
+                                    交通指引 
+                                    <span class="font-cormorant text-primary/70 text-sm italic tracking-normal">Transportation</span>
+                                </span>
+                                <svg class="icon-plus w-5 h-5 text-primary transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                             <div class="accordion-content">
-                                <div class="p-5 text-sm text-gray-600 leading-relaxed space-y-4 border-t border-gray-100">
+                                <div class="p-6 text-sm text-gray-600 leading-relaxed space-y-5 border-t border-gray-100 bg-white">
                                     <div>
-                                        <p class="font-semibold text-gray-800 mb-1 flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
+                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                             開車前往
                                         </p>
-                                        <p class="pl-6">導航至 <span class="nowrap font-medium">台北市信義區松仁路38號</span>，飯店備有地下停車場，賓客可享免費停車。</p>
+                                        <p class="pl-6 text-gray-500">導航至 <span class="nowrap font-medium text-text-main">台北市南港區經貿一路168號</span>，飯店備有地下停車場，賓客可享免費停車。</p>
                                     </div>
                                     <div>
-                                        <p class="font-semibold text-gray-800 mb-1 flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                                        <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
+                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
                                             大眾運輸
                                         </p>
-                                        <p class="pl-6">搭乘捷運板南線至 <span class="nowrap text-primary font-medium border-b border-primary/30">市政府站</span>，由 <span class="nowrap">3號出口</span> 出站，步行約 5 分鐘即可抵達。</p>
+                                        <p class="pl-6 text-gray-500">搭乘捷運板南線或文湖線至 <span class="nowrap text-primary font-medium border-b border-primary/30">南港展覽館站</span>，由 <span class="nowrap">1號出口</span> 出站，步行約 3 分鐘即可抵達。</p>
                                     </div>
                                 </div>
                             </div>
@@ -361,27 +441,29 @@
         </div>
     </section>
 
-    <section id="rsvp" class="py-20 bg-bg relative">
-        <div class="max-w-2xl mx-auto px-4 md:px-6 slide-up delay-300">
-            <div class="text-center mb-10">
-                <h2 class="font-cormorant text-4xl md:text-5xl text-primary italic mb-3">RSVP</h2>
-                <div class="w-12 h-px bg-primary mx-auto mb-3"></div>
-                <p class="tracking-widest text-gray-500 text-sm mb-2">誠摯地邀請您參與</p>
-                <p class="text-xs text-gray-400">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
+    <section id="rsvp" class="py-24 relative">
+        <div class="w-[80%] mx-auto max-w-4xl slide-up delay-300">
+            <div class="text-center mb-12">
+                <h2 class="font-cormorant text-5xl md:text-6xl text-gold-gradient italic mb-4">RSVP</h2>
+                <div class="diamond-divider mb-4">
+                    <div class="diamond"></div>
+                </div>
+                <p class="tracking-[0.2em] text-gray-500 text-sm mb-2">誠摯地邀請您參與</p>
+                <p class="text-xs text-gray-400 font-sans tracking-wide">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
             </div>
 
             <!-- Hidden Iframe for silent submission -->
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            <iframe name="hidden_iframe" id="hidden_iframe" width="80%" style="display:none;"></iframe>
 
             <form action="https://docs.google.com/forms/d/e/1FAIpQLSd8zwFKDev_JLWvFSDgRstIqCVZvXrvqvlrIVNyy2IDvl7kKQ/formResponse" 
                   method="post" target="hidden_iframe" 
                   onsubmit="submitted=true;" 
                   id="rsvp-form"
-                  class="v-card p-6 md:p-10 space-y-8">
+                  class="v-card ornate-border p-8 md:p-14 space-y-10">
 
                 <!-- Q1. 姓名 -->
-                <div class="relative pt-4">
-                    <label class="form-label mb-1" for="entry.2047345391">
+                <div class="relative pt-2">
+                    <label class="form-label mb-2" for="entry.2047345391">
                         賓客姓名 <span class="eng">NAME</span>
                     </label>
                     <input type="text" id="entry.2047345391" name="entry.2047345391" class="form-input" required placeholder="請輸入全名">
@@ -389,7 +471,7 @@
 
                 <!-- Q2. 聯絡電話 -->
                 <div class="relative">
-                    <label class="form-label mb-1" for="entry.1766251007">
+                    <label class="form-label mb-2" for="entry.1766251007">
                         聯絡電話 <span class="eng">PHONE</span>
                     </label>
                     <input type="tel" id="entry.1766251007" name="entry.1766251007" class="form-input" required placeholder="例如：0912345678">
@@ -397,10 +479,10 @@
 
                 <!-- Q3. 您是誰的親友 -->
                 <div class="relative">
-                    <label class="form-label mb-1" for="entry.1339287923">
+                    <label class="form-label mb-2" for="entry.1339287923">
                         您是哪方的親友 <span class="eng">RELATION</span>
                     </label>
-                    <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-white" required>
+                    <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
                         <option value="男方親友">男方親友</option>
                         <option value="女方親友">女方親友</option>
@@ -410,10 +492,10 @@
 
                 <!-- Q4. 關係 -->
                 <div class="relative">
-                    <label class="form-label mb-1" for="entry.1136405841">
+                    <label class="form-label mb-2" for="entry.1136405841">
                         與新人的關係 <span class="eng">CONNECTION</span>
                     </label>
-                    <select id="entry.1136405841" name="entry.1136405841" class="form-input bg-white" required>
+                    <select id="entry.1136405841" name="entry.1136405841" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
                         <option value="親戚">親戚</option>
                         <option value="朋友">朋友</option>
@@ -424,10 +506,10 @@
 
                 <!-- Q5. 是否出席 -->
                 <div class="relative">
-                    <label class="form-label mb-1" for="entry.1336036681">
+                    <label class="form-label mb-2" for="entry.1336036681">
                         是否能撥空參與 <span class="eng">ATTENDANCE</span>
                     </label>
-                    <select id="entry.1336036681" name="entry.1336036681" class="form-input bg-white" required onchange="handleAttendanceChange()">
+                    <select id="entry.1336036681" name="entry.1336036681" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="當然，一定到!">當然，一定到!</option>
                         <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option>
@@ -435,14 +517,14 @@
                 </div>
 
                 <!-- 動態顯示區塊 (僅出席者填寫) -->
-                <div id="attending-section" class="conditional-field space-y-8 border-t border-gray-100 pt-6 mt-6">
+                <div id="attending-section" class="conditional-field space-y-10 border-t border-gray-100 pt-8 mt-4">
                     
                     <!-- Q6. 參加人數 -->
                     <div class="relative">
-                        <label class="form-label mb-1" for="entry.1188616045">
+                        <label class="form-label mb-2" for="entry.1188616045">
                             參加午宴人數 (含本人) <span class="eng">GUESTS COUNT</span>
                         </label>
-                        <select id="entry.1188616045" name="entry.1188616045" class="form-input bg-white" onchange="handleGuestCountChange()">
+                        <select id="entry.1188616045" name="entry.1188616045" class="form-input bg-transparent" onchange="handleGuestCountChange()">
                             <option value="" disabled selected>請選擇人數</option>
                             <option value="0位">0位 (僅觀禮)</option>
                             <option value="1位">1位</option>
@@ -454,13 +536,13 @@
                     </div>
 
                     <!-- 進階動態區塊 (午宴人數 > 0 顯示) -->
-                    <div id="banquet-section" class="conditional-field space-y-8 bg-primary/5 p-5 rounded-xl border border-primary/10">
+                    <div id="banquet-section" class="conditional-field space-y-8 bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner">
                         <!-- Q7. 兒童椅 -->
                         <div class="relative">
-                            <label class="form-label mb-1" for="entry.630238932">
+                            <label class="form-label mb-2" for="entry.630238932">
                                 是否需要兒童椅 <span class="eng">BABY CHAIR</span>
                             </label>
-                            <select id="entry.630238932" name="entry.630238932" class="form-input bg-transparent">
+                            <select id="entry.630238932" name="entry.630238932" class="form-input bg-transparent border-gray-200">
                                 <option value="0" selected>不需要</option>
                                 <option value="1">1 張</option>
                                 <option value="2">2 張</option>
@@ -470,10 +552,10 @@
 
                         <!-- Q8. 素食人數 -->
                         <div class="relative">
-                            <label class="form-label mb-1" for="entry.1535829381">
+                            <label class="form-label mb-2" for="entry.1535829381">
                                 需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
                             </label>
-                            <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent">
+                            <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent border-gray-200">
                                 <option value="0" selected>無</option>
                                 <option value="1">1 位</option>
                                 <option value="2">2 位</option>
@@ -485,10 +567,10 @@
 
                     <!-- Q9. 喜帖需求 -->
                     <div class="relative mt-8">
-                        <label class="form-label mb-1" for="entry.2080928339">
+                        <label class="form-label mb-2" for="entry.2080928339">
                             是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
                         </label>
-                        <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-white" onchange="handleInvitationChange()">
+                        <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
                             <option value="" disabled selected>請選擇</option>
                             <option value="需要，請寄紙本喜帖給我">需要，請寄紙本喜帖給我</option>
                             <option value="不需要，響應環保，電子喜帖即可">不需要，響應環保，電子喜帖即可</option>
@@ -497,7 +579,7 @@
 
                     <!-- 紙本喜帖地址 (動態顯示) -->
                     <div id="address-section" class="conditional-field">
-                        <label class="form-label mb-1" for="entry.1299100011">
+                        <label class="form-label mb-2" for="entry.1299100011">
                             收件地址 <span class="eng">ADDRESS</span>
                         </label>
                         <input type="text" id="entry.1299100011" name="entry.1299100011" class="form-input" placeholder="請填寫含郵遞區號之完整地址">
@@ -506,54 +588,85 @@
 
                 <!-- Q10. Email (通用) -->
                 <div class="relative mt-8">
-                    <label class="form-label mb-1" for="entry.1521896031">
+                    <label class="form-label mb-2" for="entry.1521896031">
                         電子信箱 <span class="eng">EMAIL</span>
                     </label>
                     <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" placeholder="寄送行前通知用">
                 </div>
 
-                <div class="pt-8 text-center">
-                    <button type="submit" class="btn-submit w-full md:w-auto px-12 py-4 rounded-full font-medium tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                        送出回函 <span class="font-cormorant ml-2">Submit</span>
+                <div class="pt-10 text-center relative z-20">
+                    <button type="submit" class="btn-submit w-full md:w-auto px-16 py-4 rounded-full font-medium tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg">
+                        送出回函 <span class="font-cormorant ml-2 text-lg italic">Submit</span>
                     </button>
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-white py-10 border-t border-gray-100 text-center">
-        <p class="font-cormorant text-2xl text-primary italic mb-2">Tiana & William</p>
-        <p class="text-xs tracking-widest text-gray-400 font-serif">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
+    <footer class="bg-white py-16 border-t border-gray-100 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none"></div>
+        <p class="font-cormorant text-4xl text-gold-gradient italic mb-4 relative z-10">Tiana & William</p>
+        <p class="text-xs tracking-[0.3em] text-gray-400 font-serif relative z-10">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
     </footer>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">
         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-        <span id="toast-message" class="text-sm tracking-wide"></span>
+        <span id="toast-message" class="text-sm tracking-wide font-medium"></span>
     </div>
 
     <script>
         // Global variable for form submission tracking
         var submitted = false;
 
-        // Handle iframe load for silent submission
-        document.getElementById('hidden_iframe').onload = function() {
-            if (submitted) {
-                showToast('回函已成功送出，期待您的到來！');
-                resetForm();
+        // Ensure variables and dom are loaded before handling iframe
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('hidden_iframe').onload = function() {
+                if (submitted) {
+                    showToast('回函已成功送出，期待您的到來！');
+                    resetForm();
+                }
+            };
+            
+            // 產生封面星塵特效
+            createStardust();
+        });
+
+        function createStardust() {
+            const container = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 隨機位置、大小、動畫延遲與持續時間
+                let posX = Math.random() * 100;
+                let delay = Math.random() * 15;
+                let duration = 10 + Math.random() * 20;
+                let size = Math.random() * 3 + 1;
+                let opacity = Math.random() * 0.6 + 0.2;
+                
+                particle.style.left = posX + 'vw';
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.animationDelay = delay + 's';
+                particle.style.animationDuration = duration + 's';
+                particle.style.opacity = opacity;
+                
+                container.appendChild(particle);
             }
-        };
+        }
 
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                nav.classList.add('shadow-sm');
+                nav.classList.add('shadow-md');
                 nav.style.background = 'rgba(255, 255, 255, 0.9)';
             } else {
-                nav.classList.remove('shadow-sm');
-                nav.style.background = 'rgba(250, 249, 246, 0.7)';
+                nav.classList.remove('shadow-md');
+                nav.style.background = 'rgba(253, 245, 246, 0.75)';
             }
         });
 
@@ -563,7 +676,6 @@
         mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        // Close mobile menu on click
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -579,7 +691,7 @@
             
             if (distance < 0) {
                 clearInterval(updateTimer);
-                document.getElementById("countdown-container").innerHTML = "<p class='text-primary tracking-widest text-xl'>就是今天！</p>";
+                document.getElementById("countdown-container").innerHTML = "<p class='text-primary tracking-[0.3em] text-2xl font-serif italic'>就是今天！</p>";
                 return;
             }
 
@@ -598,8 +710,10 @@
             const content = button.nextElementSibling;
             if (button.classList.contains('active')) {
                 content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('open');
             } else {
                 content.style.maxHeight = "0";
+                content.classList.remove('open');
             }
         }
 
@@ -617,9 +731,9 @@
                 attendingSection.classList.remove('active');
                 guestSelect.removeAttribute('required');
                 guestSelect.value = "";
-                banquetSection.classList.remove('active'); // Reset inner section
+                banquetSection.classList.remove('active');
                 document.getElementById('entry.2080928339').value = "";
-                handleInvitationChange(); // Reset address
+                handleInvitationChange(); 
             }
         }
 
@@ -627,12 +741,10 @@
             const guestCount = document.getElementById('entry.1188616045').value;
             const banquetSection = document.getElementById('banquet-section');
             
-            // Show diet and chair options only if guests > 0
             if (guestCount && guestCount !== '0位') {
                 banquetSection.classList.add('active');
             } else {
                 banquetSection.classList.remove('active');
-                // Reset sub-fields
                 document.getElementById('entry.630238932').value = "0";
                 document.getElementById('entry.1535829381').value = "0";
             }
@@ -660,13 +772,13 @@
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 5000);
+            }, 6000);
         }
 
-        // Reset Form after successful silent submission
+        // Reset Form
         function resetForm() {
             document.getElementById('rsvp-form').reset();
-            handleAttendanceChange(); // Reset conditional fields
+            handleAttendanceChange(); 
             submitted = false;
         }
 
@@ -674,7 +786,7 @@
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1
+            threshold: 0.15
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -686,11 +798,10 @@
             });
         }, observerOptions);
 
-        // Pause animations initially if they are below the fold
         document.addEventListener('DOMContentLoaded', () => {
             const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
             animatedElements.forEach(el => {
-                if(el.closest('header') === null) { // Don't pause hero section
+                if(el.closest('header') === null) { 
                     el.style.animationPlayState = 'paused';
                     observer.observe(el);
                 }
