@@ -15,8 +15,9 @@
             --color-gold-light: #f9e5c9;
             --color-gold: #d4af37;
             --color-gold-dark: #aa7c11;
-            --color-bg-center: #ffffff;
-            --color-bg-edge: #fdf5f6;
+            /* 換成極度優雅的淡粉色背景 */
+            --color-bg-center: #fff5f7;
+            --color-bg-edge: #fce8eb;
             --color-text-main: #3d3b38;
             --color-text-muted: #6b6660;
         }
@@ -253,10 +254,6 @@
         .toast.show {
             bottom: 40px;
         }
-
-        footer {
-            padding-bottom: 8rem; /* 增加底部空間 */
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -448,19 +445,13 @@
                 </div>
 
                 <div class="relative">
-                    <label class="form-label mb-2" for="entry.1766251007">
-                        聯絡電話 <span class="eng">PHONE</span>
-                    </label>
-                    <input type="tel" id="entry.1766251007" name="entry.1766251007" class="form-input" required placeholder="例如：0912345678">
-                </div>
-
-                <div class="relative">
                     <label class="form-label mb-2" for="entry.1339287923">
                         您是哪方的親友 <span class="eng">RELATION</span>
                     </label>
                     <select id="entry.1339287923" name="entry.1339287923" class="form-input bg-transparent" required>
                         <option value="" disabled selected>請選擇</option>
-                        <option value="男方親友">男方親友</option> <!-- ⚠️ 若表單有英文，請改成如: 威廉的親友 William's friend -->
+                        <!-- 🚨檢查這裡：如果有英文請改掉！ -->
+                        <option value="男方親友">男方親友</option> 
                         <option value="孟庭的親友 Tiana's friend">女方親友</option>
                         <option value="共同親友">共同親友</option>
                     </select>
@@ -480,20 +471,20 @@
                 </div>
 
                 <div class="relative">
-                    <label class="form-label mb-2" for="entry.1336036681">
+                    <label class="form-label mb-2" for="entry.2033180862">
                         是否能撥空參與 <span class="eng">ATTENDANCE</span>
                     </label>
-                    <select id="entry.1336036681" name="entry.1336036681" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
+                    <select id="entry.2033180862" name="entry.2033180862" class="form-input bg-transparent" required onchange="handleAttendanceChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="當然，一定到! Yes, I am delighted to attend">當然，一定到!</option>
-                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option> <!-- ⚠️ 若表單有英文，請務必補上 -->
+                        <option value="無法到場，給予滿滿祝福">無法到場，給予滿滿祝福</option>
                     </select>
                 </div>
 
                 <!-- 動態顯示區塊 (僅出席者填寫) -->
                 <div id="attending-section" class="conditional-field border-t border-gray-100 pt-8 mt-4">
                     
-                    <!-- Q6. 參加人數 -->
+                    <!-- Q5. 參加人數 -->
                     <div class="relative">
                         <label class="form-label mb-2" for="entry.1188616045">
                             參加午宴人數 (含本人) <span class="eng">GUESTS COUNT</span>
@@ -509,12 +500,10 @@
                         </select>
                     </div>
 
-                    <!-- 進階動態區塊 (午宴人數 > 0 顯示兒童椅) -->
-
                     <!-- 進階動態區塊 (午宴人數 > 0 顯示兒童椅與素食) -->
-                    <div id="banquet-section" class="conditional-field bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner">
+                    <div id="banquet-section" class="conditional-field bg-gray-50/80 p-6 rounded-xl border border-gray-100 shadow-inner mt-6">
                         <div class="space-y-6">
-                            <!-- Q7. 兒童椅 -->
+                            <!-- Q6. 兒童椅 -->
                             <div class="relative">
                                 <label class="form-label mb-2" for="entry.630238932">
                                     是否需要兒童椅 <span class="eng">BABY CHAIR</span>
@@ -526,31 +515,33 @@
                                     <option value="3">3 張</option>
                                 </select>
                             </div>
+
+                            <!-- Q7. 素食人數 (✅ 已加回此區塊，並確認綁定 ID 1535829381) -->
+                            <div class="relative">
+                                <label class="form-label mb-2" for="entry.1535829381">
+                                    需安排素食餐點人數 <span class="eng">VEGETARIAN</span>
+                                </label>
+                                <select id="entry.1535829381" name="entry.1535829381" class="form-input bg-transparent border-gray-200">
+                                    <option value="0" selected>無</option>
+                                    <option value="1">1 位</option>
+                                    <option value="2">2 位</option>
+                                    <option value="3">3 位</option>
+                                    <option value="4">4 位以上</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative mt-8">
-                <!-- Q9. 喜帖需求 -->
-                <div class="relative mt-8">
-                    <label class="form-label mb-2" for="entry.2080928339">
-                        是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
-                    </label>
-                    <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
-                        <option value="" disabled selected>請選擇</option>
-                        <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option> <!-- 已精確對齊您的兩個空格 -->
-                        <option value="不需要，響應環保，電子喜帖即可">不需要，響應環保，電子喜帖即可</option> <!-- ⚠️ 若表單有英文，請務必補上 -->
-                    </select>
-                </div>
-
-                <div class="relative mt-8">
+                <!-- Q8. 喜帖需求 -->
+                <div class="relative mt-8 border-t border-gray-100 pt-8">
                     <label class="form-label mb-2" for="entry.2080928339">
                         是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
                     </label>
                     <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option>
-                        <option value="不需要，響應環保，電子喜帖即可 No, thanks">不需要，響應環保，電子喜帖即可</option> 
+                        <option value="需要，請寄電子喜帖給我 Yes, I need digital wedding invitation">需要，請寄電子喜帖給我</option>
                     </select>
                 </div>
 
@@ -562,15 +553,15 @@
                     <input type="text" id="entry.1299100011" name="entry.1299100011" class="form-input" placeholder="請填寫含郵遞區號之完整地址">
                 </div>
 
-                <!-- Q10. Email -->
-                <div class="relative mt-8">
+                <!-- Q9. Email -->
+                <div class="relative mt-8 border-t border-gray-100 pt-8">
                     <label class="form-label mb-2" for="entry.1521896031">
                         電子信箱 <span class="eng">EMAIL</span>
                     </label>
-                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" placeholder="寄送行前通知用">
+                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" required placeholder="寄送行前通知用">
                 </div>
 
-                <!-- Q11. 留言給新人 -->
+                <!-- Q10. 留言給新人 -->
                 <div class="relative mt-8">
                     <label class="form-label mb-2" for="entry.1716942766">
                         有什麼話想跟我們說嗎？ <span class="eng">MESSAGE</span>
@@ -587,7 +578,8 @@
         </div>
     </section>
 
-    <footer class="bg-white py-16 border-t border-gray-100 text-center relative overflow-hidden">
+    <!-- 頁尾已大幅加長底部空間 (pb-32) -->
+    <footer class="bg-white pt-20 pb-32 mb-16 border-t border-gray-100 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none"></div>
         <p class="font-cormorant text-4xl text-gold-gradient italic mb-4 relative z-10">Tiana & William</p>
         <p class="text-xs tracking-[0.3em] text-gray-400 font-serif relative z-10">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
@@ -611,6 +603,9 @@
             };
             
             createStardust();
+            
+            // 初始化隱藏欄位的屬性
+            disableHiddenFields();
         });
 
         function createStardust() {
@@ -693,48 +688,74 @@
             }
         }
 
+        /* 核心邏輯修改：隱藏時強制禁用(disabled)，避免送出空白內容導致 Google Form 報錯 */
+        function disableHiddenFields() {
+            document.getElementById('entry.1188616045').disabled = true;
+            document.getElementById('entry.630238932').disabled = true;
+            document.getElementById('entry.1535829381').disabled = true;
+            document.getElementById('entry.1299100011').disabled = true;
+        }
+
         function handleAttendanceChange() {
-            const attendance = document.getElementById('entry.1336036681').value;
+            const selectElement = document.getElementById('entry.2033180862');
+            const attendance = selectElement ? selectElement.value : "";
             const attendingSection = document.getElementById('attending-section');
             const guestSelect = document.getElementById('entry.1188616045');
             const banquetSection = document.getElementById('banquet-section');
+            const babyChairSelect = document.getElementById('entry.630238932');
+            const vegSelect = document.getElementById('entry.1535829381');
             
-            if (attendance.includes('當然，一定到')) {
+            if (attendance && attendance.includes('當然，一定到')) {
                 attendingSection.classList.add('active');
+                guestSelect.disabled = false; // 啟用
                 guestSelect.setAttribute('required', 'required');
             } else {
                 attendingSection.classList.remove('active');
                 guestSelect.removeAttribute('required');
                 guestSelect.value = "";
+                guestSelect.disabled = true; // 禁用
                 banquetSection.classList.remove('active');
+                babyChairSelect.value = "0";
+                babyChairSelect.disabled = true;
+                vegSelect.value = "0";
+                vegSelect.disabled = true;
             }
         }
 
         function handleGuestCountChange() {
             const guestCount = document.getElementById('entry.1188616045').value;
             const banquetSection = document.getElementById('banquet-section');
+            const babyChairSelect = document.getElementById('entry.630238932');
+            const vegSelect = document.getElementById('entry.1535829381');
             
             if (guestCount && guestCount !== '0位') {
                 banquetSection.classList.add('active');
+                babyChairSelect.disabled = false; // 啟用
+                vegSelect.disabled = false;       // 啟用
             } else {
                 banquetSection.classList.remove('active');
-                document.getElementById('entry.630238932').value = "0";
-                document.getElementById('entry.1535829381').value = "0"; // 重置素食人數
+                babyChairSelect.value = "0";
+                babyChairSelect.disabled = true;  // 禁用
+                vegSelect.value = "0";
+                vegSelect.disabled = true;        // 禁用
             }
         }
 
         function handleInvitationChange() {
-            const invType = document.getElementById('entry.2080928339').value;
+            const selectElement = document.getElementById('entry.2080928339');
+            const invType = selectElement ? selectElement.value : "";
             const addressSection = document.getElementById('address-section');
             const addressInput = document.getElementById('entry.1299100011');
             
-            if (invType.includes('需要，請寄紙本')) {
+            if (invType && invType.includes('需要，請寄紙本')) {
                 addressSection.classList.add('active');
+                addressInput.disabled = false; // 啟用
                 addressInput.setAttribute('required', 'required');
             } else {
                 addressSection.classList.remove('active');
                 addressInput.removeAttribute('required');
                 addressInput.value = "";
+                addressInput.disabled = true; // 禁用
             }
         }
 
@@ -750,6 +771,8 @@
         function resetForm() {
             document.getElementById('rsvp-form').reset();
             handleAttendanceChange(); 
+            handleGuestCountChange();
+            handleInvitationChange();
             submitted = false;
         }
 
