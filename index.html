@@ -12,9 +12,9 @@
         :root {
             --color-primary: #5e8f5b;
             --color-secondary: #4a7a62;
-            --color-gold-light: #cfe3cc;
-            --color-gold: #5e8f5b;
-            --color-gold-dark: #3a6438;
+            --color-green-light: #cfe3cc;
+            --color-green: #5e8f5b;
+            --color-green-dark: #3a6438;
             --color-bg-center: #f4f9f3;
             --color-bg-edge: #e6f0e3;
             --color-text-main: #1e3420;
@@ -186,7 +186,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.8rem;
             letter-spacing: 0.05em;
-            color: #839093;
+            color: var(--color-text-muted);
         }
         .form-input:focus + .form-label,
         .form-input:not(:placeholder-shown) + .form-label {
@@ -430,8 +430,8 @@
 
         .reel-hero {
             min-height: 100svh;
-            padding: 8rem 5vw 4rem;
-            align-items: flex-end;
+            padding: 10rem 5vw 4rem 0;
+            align-items: flex-start;
         }
         .reel-hero .hero-copy {
             width: min(1120px, 100%);
@@ -643,12 +643,15 @@
             font-size: clamp(1.1rem, 2.6vw, 1.5rem);
             line-height: 1.4;
             white-space: nowrap;
+            font-weight: 300;
+            letter-spacing: 0.18em;
         }
         .couple-caption .zh {
             display: inline;
             font-family: 'Noto Serif TC', serif;
             font-size: clamp(0.92rem, 2.4vw, 1.25rem);
             letter-spacing: 0.14em;
+            margin-right: 0.5em;
         }
         .reel-countdown {
             padding-top: 6rem;
@@ -666,6 +669,99 @@
         }
         .reel-details .v-card {
             border-radius: 4px;
+        }
+
+        .wedding-calendar {
+            display: inline-block;
+            width: 100%;
+            max-width: 420px;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.2rem;
+        }
+        .calendar-month {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-style: italic;
+            color: var(--color-text-main);
+            letter-spacing: 0.08em;
+        }
+        .calendar-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            color: var(--color-text-muted);
+            letter-spacing: 0.06em;
+        }
+        .calendar-grid {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .calendar-grid th {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.18em;
+            color: var(--color-text-muted);
+            padding-bottom: 0.7rem;
+            font-weight: 400;
+        }
+        .calendar-grid td {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--color-text-main);
+            padding: 0.4rem 0;
+            line-height: 2.4rem;
+            width: calc(100% / 7);
+        }
+        .calendar-grid td.other-month {
+            color: rgba(30, 52, 32, 0.2);
+        }
+        .calendar-grid td.wedding-day {
+            position: relative;
+        }
+        .calendar-grid td.wedding-day span {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            color: #fff;
+            font-weight: 600;
+            z-index: 1;
+        }
+        .calendar-grid td.wedding-day span::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-primary);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .calendar-grid td.wedding-day::after {
+            content: '♡';
+            position: absolute;
+            top: -0.5rem;
+            right: 0.2rem;
+            font-size: 0.65rem;
+            color: var(--color-primary);
+        }
+        .calendar-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(94,143,91,0.25), transparent);
+            margin: 1.4rem 0;
+        }
+        .calendar-info {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--color-text-main);
+            letter-spacing: 0.08em;
+            line-height: 2;
+            font-weight: 300;
         }
 
         .photo-gallery {
@@ -728,14 +824,10 @@
         }
 
         @media (max-width: 900px) {
-            .gallery-grid,
             .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1.2rem;
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
             }
-        }
-
-        @media (max-width: 900px) {
             .reel-hero {
                 padding: 7rem 1.35rem 3.5rem;
             }
@@ -824,11 +916,11 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-[#142812]/95 backdrop-blur-xl absolute w-full border-b border-primary/20 shadow-xl">
+        <div id="mobile-menu" class="md:hidden hidden bg-white/97 backdrop-blur-xl absolute w-full border-b border-primary/15 shadow-md">
             <div class="px-4 pt-4 pb-8 space-y-2 text-center">
-                <a href="#about" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">關於我們</a>
-                <a href="#gallery" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">照片</a>
-                <a href="#details" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">婚禮詳情</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-text-main hover:text-primary rounded-md">關於我們</a>
+                <a href="#gallery" class="block px-3 py-3 text-base font-medium text-text-main hover:text-primary rounded-md">照片</a>
+                <a href="#details" class="block px-3 py-3 text-base font-medium text-text-main hover:text-primary rounded-md">婚禮詳情</a>
                 <a href="#rsvp" class="block px-3 py-3 text-base font-medium text-primary bg-primary/10 rounded-md">出席回函</a>
             </div>
         </div>
@@ -847,19 +939,8 @@
             <div>
                 <p class="font-cormorant text-lg md:text-2xl tracking-[0.42em] mb-7 text-white/78 uppercase">We are getting married</p>
                 <h1 class="hero-title font-cormorant font-bold italic text-real-gold">Tiana & William</h1>
-                <p class="mt-8 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
-                <a href="#about" class="reel-cta mt-10 text-xs tracking-[0.28em] uppercase">
-                    Scroll the story
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </a>
+                <p class="mt-52 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
             </div>
-            <p class="hero-meta font-cormorant">2026 08 16 / Taipei</p>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
         </div>
     </header>
 
@@ -874,7 +955,7 @@
             <div class="couple-person slide-up">
                 <div class="couple-caption">
                     <p>Bride</p>
-                    <h2 class="font-cormorant italic"><span class="zh">新娘 蔡孟庭</span>Tiana</h2>
+                    <h2 class="font-cormorant"><span class="zh">新娘 蔡孟庭</span>Tiana</h2>
                 </div>
                 <figure class="couple-card">
                     <img src="img/S__26501165.jpg" alt="新娘 蔡孟庭 Tiana" loading="lazy">
@@ -890,7 +971,7 @@
             <div class="couple-person slide-up delay-100">
                 <div class="couple-caption">
                     <p>Groom</p>
-                    <h2 class="font-cormorant italic"><span class="zh">新郎 鍾文豪</span>William</h2>
+                    <h2 class="font-cormorant"><span class="zh">新郎 鍾文豪</span>William</h2>
                 </div>
                 <figure class="couple-card">
                     <img src="img/S__26501167.jpg" alt="新郎 鍾文豪 William" loading="lazy">
@@ -900,7 +981,7 @@
     </section>
 
     <section id="gallery" class="photo-gallery">
-        <div class="w-[86%] mx-auto max-w-6xl mb-10">
+        <div class="w-[95%] md:w-[86%] mx-auto max-w-6xl mb-10">
             <p class="gallery-kicker mb-4">Gallery</p>
             <h2 class="font-cormorant text-5xl md:text-7xl text-gold-gradient italic leading-none">Little Frames</h2>
         </div>
@@ -955,25 +1036,70 @@
     </section>
 
     <section id="details" class="reel-details relative">
-        <div class="w-[80%] mx-auto max-w-5xl">
+        <div class="w-[95%] md:w-[80%] mx-auto max-w-5xl">
             
             <div class="text-center mb-16 slide-up">
                 <h2 class="font-cormorant text-5xl md:text-6xl text-gold-gradient italic mb-4">The Details</h2>
                 <div class="diamond-divider mb-4">
                     <div class="diamond"></div>
                 </div>
-                <p class="tracking-[0.2em] text-gray-500 text-sm uppercase">婚禮資訊</p>
+                <p class="tracking-[0.2em] text-gray-500 text-lg uppercase">婚禮資訊</p>
             </div>
 
             <div class="v-card ornate-border p-10 md:p-16 slide-up delay-100">
                 <div class="space-y-12">
-                    <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-20">
+                        <div class="w-full md:w-4/12 flex-shrink-0">
+                            <img src="img/S__26501174.jpg" alt="Tiana and William" class="w-full h-full object-cover rounded-sm" style="max-height: 420px; object-fit: cover;">
                         </div>
-                        <h3 class="text-xl font-semibold tracking-widest mb-3 text-text-main">2026 08 16</h3>
-                        <p class="font-cormorant text-2xl text-gray-600 mb-2 italic">August 16, 2026 (Sunday)</p>
-                        <p class="text-gray-500 text-sm tracking-[0.1em] mt-3">10:00 證婚儀式 &nbsp;|&nbsp; 12:00 午宴入席</p>
+                        <div class="wedding-calendar w-full md:w-8/12">
+                            <div class="calendar-header">
+                                <span class="calendar-month">August</span>
+                                <span class="calendar-year">2026</span>
+                            </div>
+                            <table class="calendar-grid">
+                                <thead>
+                                    <tr>
+                                        <th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="wedding-day"><span>16</span></td>
+                                        <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td><td>31</td>
+                                        <td class="other-month"></td><td class="other-month"></td>
+                                        <td class="other-month"></td><td class="other-month"></td>
+                                        <td class="other-month"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="calendar-divider"></div>
+                            <div class="calendar-info">
+                                <p>10:00 &nbsp;證婚儀式</p>
+                                <p>12:00 &nbsp;午宴入席</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="w-full flex justify-center">
@@ -984,8 +1110,8 @@
                         <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-6 shadow-inner">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <h3 class="text-xl font-semibold tracking-widest mb-2 nowrap text-text-main">台北漢來飯店</h3>
-                        <p class="text-gray-500 text-base tracking-widest mb-8 nowrap">三樓 鉑金A廳</p>
+                        <h3 class="text-3xl font-semibold tracking-widest mb-2 nowrap text-text-main">台北漢來飯店</h3>
+                        <p class="text-gray-500 text-xl tracking-widest mb-8 nowrap">三樓 鉑金A廳</p>
 
                         <div class="text-left mt-8 border border-primary/20 rounded-xl overflow-hidden bg-white shadow-sm">
                             <div class="px-6 py-5 bg-gray-50/50 border-b border-primary/10">
@@ -1030,14 +1156,14 @@
     </section>
 
     <section id="rsvp" class="py-24 relative">
-        <div class="w-[80%] mx-auto max-w-4xl slide-up delay-300">
+        <div class="w-[95%] md:w-[80%] mx-auto max-w-4xl slide-up delay-300">
             <div class="text-center mb-12">
                 <h2 class="font-cormorant text-5xl md:text-6xl text-gold-gradient italic mb-4">RSVP</h2>
                 <div class="diamond-divider mb-4">
                     <div class="diamond"></div>
                 </div>
-                <p class="tracking-[0.2em] text-gray-500 text-sm mb-2">誠摯地邀請您參與</p>
-                <p class="text-xs text-gray-400 font-sans tracking-wide">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
+                <p class="tracking-[0.2em] text-gray-500 text-xl mb-2">誠摯地邀請您參與</p>
+                <p class="text-base text-gray-400 font-sans tracking-wide">請於 2026/07/01 前填寫完畢，以便為您安排座位</p>
             </div>
 
             <form id="rsvp-form" class="v-card ornate-border p-8 md:p-14 space-y-10">
@@ -1174,10 +1300,10 @@
         </div>
     </section>
 
-    <footer class="bg-white pt-20 pb-48 mb-16 border-t border-gray-100 text-center relative overflow-hidden">
+    <footer class="pt-20 pb-20 md:pb-32 border-t border-primary/10 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none"></div>
         <p class="font-cormorant text-4xl text-real-gold italic font-bold mb-4 relative z-10">Tiana & William</p>
-        <p class="text-xs tracking-[0.3em] text-gray-400 font-serif relative z-10">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
+        <p class="text-xs tracking-[0.3em] font-serif relative z-10" style="color: var(--color-text-muted);">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
     </footer>
 
     <div id="toast" class="toast">
