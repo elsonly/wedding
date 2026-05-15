@@ -10,22 +10,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --color-primary: #d4a373;
-            --color-secondary: #8da399;
-            --color-gold-light: #f9e5c9;
-            --color-gold: #d4af37;
-            --color-gold-dark: #aa7c11;
-            --color-bg-center: #fff5f7;
-            --color-bg-edge: #fce8eb;
-            --color-text-main: #3d3b38;
-            --color-text-muted: #6b6660;
+            --color-primary: #5e8f5b;
+            --color-secondary: #4a7a62;
+            --color-gold-light: #cfe3cc;
+            --color-gold: #5e8f5b;
+            --color-gold-dark: #3a6438;
+            --color-bg-center: #f4f9f3;
+            --color-bg-edge: #e6f0e3;
+            --color-text-main: #1e3420;
+            --color-text-muted: #587056;
+            --color-ink: #142812;
+            --color-paper: #f7fbf6;
+            --color-starlight: #c6dfc2;
         }
 
         body {
             font-family: 'Noto Serif TC', serif;
-            background: radial-gradient(circle at top center, var(--color-bg-center) 0%, var(--color-bg-edge) 100%);
+            background:
+                radial-gradient(circle at 18% 10%, rgba(198, 223, 194, 0.5) 0%, transparent 28%),
+                radial-gradient(circle at 82% 2%, rgba(94, 143, 91, 0.18) 0%, transparent 26%),
+                linear-gradient(145deg, var(--color-bg-center) 0%, #dff0db 48%, var(--color-bg-edge) 100%);
             color: var(--color-text-main);
             overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.28;
+            background-image:
+                linear-gradient(rgba(20, 40, 18, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 40, 18, 0.02) 1px, transparent 1px);
+            background-size: 38px 38px;
+            mask-image: linear-gradient(to bottom, transparent, black 12%, black 86%, transparent);
         }
 
         .font-cormorant {
@@ -33,20 +52,35 @@
         }
 
         .text-gold-gradient {
-            background: linear-gradient(to right, #8a6132, #c59b6d, #8a6132);
+            background: linear-gradient(105deg, #d4eed0 0%, #5e8f5b 44%, #e8f5e6 72%, #3a6438 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             display: inline-block;
-            filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.18));
+            filter: drop-shadow(0px 4px 12px rgba(20, 40, 18, 0.22));
+        }
+        .text-real-gold {
+            background: linear-gradient(105deg, #f7edd0 0%, #c8a96a 44%, #f0e0a0 72%, #9a7538 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0px 4px 16px rgba(180, 130, 40, 0.3));
         }
 
         .glass-nav {
-            background: rgba(253, 245, 246, 0.75);
+            background: rgba(255, 255, 255, 0.82);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(212, 163, 115, 0.15);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(94, 143, 91, 0.2);
+            box-shadow: 0 12px 35px rgba(20, 40, 18, 0.1);
+        }
+        .glass-nav a:not(.text-gold-gradient) {
+            color: rgba(30, 52, 32, 0.72);
+        }
+        .glass-nav a:not(.text-gold-gradient):hover,
+        .glass-nav a.text-primary {
+            color: var(--color-primary);
         }
 
         .ornate-border {
@@ -56,25 +90,33 @@
             content: '';
             position: absolute;
             top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1px solid rgba(212, 163, 115, 0.3);
+            border: 1px solid rgba(94, 143, 91, 0.35);
             border-radius: inherit;
             pointer-events: none;
             z-index: 10;
         }
 
         .timer-card {
-            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(253,245,246,0.9) 100%);
-            box-shadow: 
-                0 15px 35px -5px rgba(212, 163, 115, 0.2), 
-                0 5px 15px -5px rgba(0, 0, 0, 0.05),
-                inset 0 0 0 1px rgba(255,255,255,0.9);
+            background:
+                radial-gradient(circle at 18% 12%, rgba(198, 223, 194, 0.3), transparent 36%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 248, 238, 0.96) 100%);
+            box-shadow:
+                0 24px 48px -20px rgba(20, 40, 18, 0.18),
+                inset 0 0 0 1px rgba(94, 143, 91, 0.18);
             border-radius: 12px;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            color: var(--color-text-main);
         }
         .timer-card:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px -5px rgba(212, 163, 115, 0.25);
+            box-shadow: 0 28px 58px -20px rgba(20, 40, 18, 0.24);
+        }
+        .timer-card span:first-child {
+            color: var(--color-text-main);
+        }
+        .timer-card span:last-child {
+            color: var(--color-text-muted);
         }
         
         .diamond-divider {
@@ -87,7 +129,7 @@
             content: '';
             height: 1px;
             width: 60px;
-            background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.5), transparent);
+            background: linear-gradient(to right, transparent, rgba(94, 143, 91, 0.55), transparent);
         }
         .diamond-divider .diamond {
             width: 6px;
@@ -99,10 +141,12 @@
         }
 
         .v-card {
-            background: #ffffff;
+            background:
+                linear-gradient(135deg, rgba(248, 252, 247, 0.96), rgba(224, 240, 220, 0.9)),
+                var(--color-paper);
             border-radius: 16px;
-            box-shadow: 0 20px 50px -10px rgba(212, 163, 115, 0.15);
-            border: 1px solid rgba(212, 163, 115, 0.15);
+            box-shadow: 0 30px 70px -28px rgba(20, 40, 18, 0.22);
+            border: 1px solid rgba(94, 143, 91, 0.18);
             position: relative;
             overflow: hidden;
         }
@@ -110,13 +154,13 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, #e3c4a8, var(--color-primary), #e3c4a8);
+            background: linear-gradient(90deg, #c6dfc2, var(--color-primary), #c6dfc2);
         }
 
         .form-input {
             width: 100%;
             border: none;
-            border-bottom: 1px solid #e5e0d8;
+            border-bottom: 1px solid rgba(20, 40, 18, 0.18);
             background: transparent;
             padding: 12px 4px;
             font-size: 1rem;
@@ -142,7 +186,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.8rem;
             letter-spacing: 0.05em;
-            color: #b0a89f;
+            color: #839093;
         }
         .form-input:focus + .form-label,
         .form-input:not(:placeholder-shown) + .form-label {
@@ -151,7 +195,7 @@
         
         select.form-input {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4a373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e8f5b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 4px center;
             background-size: 1em;
@@ -186,15 +230,15 @@
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #c59b6d, #d4a373, #c59b6d);
+            background: linear-gradient(135deg, #142812, #2d5a2a, #5e8f5b);
             background-size: 200% auto;
-            color: white;
+            color: #f7fbf6;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 20px -5px rgba(212, 163, 115, 0.4);
+            box-shadow: 0 18px 34px -18px rgba(20, 40, 18, 0.55);
         }
         .btn-submit:hover {
             background-position: right center;
-            box-shadow: 0 15px 25px -5px rgba(212, 163, 115, 0.6);
+            box-shadow: 0 22px 38px -18px rgba(20, 40, 18, 0.65);
             transform: translateY(-2px);
         }
         .btn-submit:disabled {
@@ -228,9 +272,9 @@
         .particle {
             position: absolute;
             width: 3px; height: 3px;
-            background-color: rgba(255, 235, 190, 0.8);
+            background-color: rgba(198, 223, 194, 0.86);
             border-radius: 50%;
-            box-shadow: 0 0 8px 2px rgba(255, 235, 190, 0.4);
+            box-shadow: 0 0 10px 2px rgba(94, 143, 91, 0.3);
             animation: float-up linear infinite;
         }
         @keyframes float-up {
@@ -245,11 +289,11 @@
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #c59b6d, #d4a373);
+            background: linear-gradient(135deg, #5e8f5b, #8ab887);
             color: white;
             padding: 14px 28px;
             border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.4);
+            box-shadow: 0 12px 32px rgba(20, 40, 18, 0.3);
             transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 100;
             display: flex;
@@ -261,6 +305,497 @@
         }
         .toast.error {
             background: linear-gradient(135deg, #e57373, #ef5350);
+        }
+
+        .music-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 90;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(247, 251, 246, 0.92);
+            color: var(--color-primary);
+            border: 1px solid rgba(94, 143, 91, 0.3);
+            box-shadow: 0 14px 35px rgba(20, 40, 18, 0.16);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .music-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(20, 40, 18, 0.2);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        .music-toggle.playing {
+            background: linear-gradient(135deg, #5e8f5b, #8ab887);
+            color: #ffffff;
+            box-shadow: 0 0 0 6px rgba(94, 143, 91, 0.18), 0 18px 40px rgba(20, 40, 18, 0.2);
+        }
+        .music-toggle .icon-pause {
+            display: none;
+        }
+        .music-toggle.playing .icon-play {
+            display: none;
+        }
+        .music-toggle.playing .icon-pause {
+            display: block;
+        }
+        .music-player-frame {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 11;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 52% 34%, rgba(198, 223, 194, 0.18), transparent 18%),
+                radial-gradient(circle at 78% 22%, rgba(94, 143, 91, 0.16), transparent 24%),
+                linear-gradient(115deg, rgba(10, 28, 10, 0.28), transparent 46%, rgba(10, 28, 10, 0.44));
+            mix-blend-mode: screen;
+        }
+
+        #timer-section,
+        #details,
+        #rsvp {
+            position: relative;
+        }
+        #details::before,
+        #rsvp::before {
+            content: '';
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(20, 40, 18, 0.12), rgba(94, 143, 91, 0.3), transparent);
+        }
+
+        footer {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(198, 223, 194, 0.4), transparent 34%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(240, 248, 238, 0.98)) !important;
+            color: var(--color-text-muted);
+            border-top-color: rgba(94, 143, 91, 0.18) !important;
+        }
+        footer .text-gray-400 {
+            color: var(--color-text-muted) !important;
+        }
+
+        .story-photo {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 34px 72px -32px rgba(20, 40, 18, 0.36);
+            background: var(--color-paper);
+        }
+        .story-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, transparent 62%, rgba(20, 40, 18, 0.36)),
+                radial-gradient(circle at 18% 16%, rgba(198, 223, 194, 0.2), transparent 30%);
+        }
+        .story-photo img {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            max-height: 760px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .story-copy {
+            background:
+                linear-gradient(145deg, rgba(248, 252, 247, 0.95), rgba(224, 240, 220, 0.9)),
+                var(--color-paper);
+            border: 1px solid rgba(94, 143, 91, 0.16);
+            box-shadow: 0 24px 58px -34px rgba(20, 40, 18, 0.28);
+        }
+
+        .reel-hero {
+            min-height: 100svh;
+            padding: 8rem 5vw 4rem;
+            align-items: flex-end;
+        }
+        .reel-hero .hero-copy {
+            width: min(1120px, 100%);
+            margin: 0 auto;
+            text-align: left;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+            gap: 2rem;
+        }
+        .reel-hero .hero-title {
+            font-size: clamp(3.4rem, 9vw, 8.5rem);
+            line-height: 0.82;
+            max-width: 7ch;
+        }
+        .reel-hero .hero-meta {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.34em;
+            color: rgba(232, 245, 230, 0.8);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+        .reel-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            border: 1px solid rgba(232, 245, 230, 0.45);
+            border-radius: 999px;
+            padding: 0.9rem 1.35rem;
+            color: rgba(232, 245, 230, 0.9);
+            background: rgba(20, 40, 18, 0.22);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+        }
+        .reel-cta:hover {
+            transform: translateY(-2px);
+            border-color: rgba(198, 223, 194, 0.82);
+            background: rgba(232, 245, 230, 0.1);
+        }
+        .reel-story {
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            padding: 7rem 5vw;
+        }
+        .reel-story-grid {
+            width: min(1180px, 100%);
+            display: grid;
+            grid-template-columns: minmax(260px, 0.58fr) minmax(320px, 0.42fr);
+            gap: clamp(2rem, 6vw, 5rem);
+            align-items: center;
+        }
+        .reel-photo-frame {
+            position: relative;
+            width: min(470px, 100%);
+            aspect-ratio: 9 / 13.6;
+            justify-self: end;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f7fbf6;
+            box-shadow: 0 44px 90px -44px rgba(20, 40, 18, 0.32);
+        }
+        .reel-photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border: 1px solid rgba(94, 143, 91, 0.25);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .reel-photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, transparent, rgba(20, 40, 18, 0.18)),
+                radial-gradient(circle at 24% 18%, rgba(198, 223, 194, 0.2), transparent 32%);
+            z-index: 1;
+        }
+        .reel-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .reel-caption {
+            position: absolute;
+            left: 28px;
+            right: 28px;
+            bottom: 28px;
+            z-index: 3;
+            color: #f7fbf6;
+            font-size: clamp(2.4rem, 6vw, 5.4rem);
+            line-height: 0.9;
+            text-shadow: 0 12px 28px rgba(20, 40, 18, 0.52);
+        }
+        .reel-copy {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--color-text-main);
+        }
+        .reel-copy .chapter {
+            color: var(--color-primary);
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+        .reel-copy h2 {
+            font-size: clamp(3.2rem, 7vw, 7.6rem);
+            line-height: 0.88;
+            max-width: 7ch;
+        }
+        .reel-copy p {
+            max-width: 32rem;
+            color: var(--color-text-muted);
+            line-height: 2.1;
+        }
+        .couple-grid {
+            width: min(760px, 100%);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) clamp(2.5rem, 7vw, 4rem) minmax(0, 1fr);
+            gap: clamp(0.8rem, 3vw, 1.8rem);
+            align-items: center;
+            position: relative;
+            padding: clamp(1rem, 3vw, 2rem) 0;
+        }
+        .couple-bow {
+            position: absolute;
+            top: 1.05rem;
+            left: 50%;
+            width: min(420px, 62%);
+            transform: translateX(-50%);
+            color: rgba(68, 70, 68, 0.9);
+            z-index: 3;
+        }
+        .couple-bow svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .couple-invite-copy {
+            grid-column: 1 / -1;
+            position: relative;
+            z-index: 4;
+            max-width: 33rem;
+            margin: clamp(1.8rem, 5vw, 3rem) auto clamp(1.35rem, 4vw, 2.25rem);
+            text-align: center;
+            color: rgba(68, 70, 68, 0.82);
+            line-height: 2.2;
+            letter-spacing: 0.18em;
+            font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 300;
+        }
+        .couple-person {
+            min-width: 0;
+            position: relative;
+            z-index: 4;
+        }
+        .couple-heart {
+            width: clamp(34px, 6vw, 54px);
+            height: clamp(34px, 6vw, 54px);
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            filter:
+                drop-shadow(0 1px 1px rgba(68, 70, 68, 0.35))
+                drop-shadow(0 8px 12px rgba(68, 70, 68, 0.16));
+            z-index: 4;
+        }
+        .couple-heart svg {
+            width: 100%;
+            height: 100%;
+        }
+        .couple-card {
+            position: relative;
+            width: min(320px, 100%);
+            margin: 0 auto;
+            background: transparent;
+            box-shadow: 0 18px 44px -30px rgba(5, 24, 35, 0.54);
+        }
+        .couple-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .couple-caption {
+            color: rgba(48, 49, 47, 0.9);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .couple-caption p {
+            color: rgba(68, 70, 68, 0.6);
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            font-size: 0.66rem;
+            margin-bottom: 0.35rem;
+        }
+        .couple-caption h2 {
+            font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+        .couple-caption .zh {
+            display: inline;
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(0.92rem, 2.4vw, 1.25rem);
+            letter-spacing: 0.14em;
+        }
+        .reel-countdown {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            background:
+                radial-gradient(circle at 70% 20%, rgba(198, 223, 194, 0.5), transparent 38%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 248, 238, 0.96));
+            color: var(--color-text-main);
+        }
+        .reel-countdown .text-gold-gradient {
+            filter: none;
+        }
+        .reel-details {
+            padding-top: 7rem;
+        }
+        .reel-details .v-card {
+            border-radius: 4px;
+        }
+
+        .photo-gallery {
+            padding: 6rem 5vw 8rem;
+            position: relative;
+        }
+        .photo-gallery::before {
+            content: '';
+            position: absolute;
+            left: 5vw;
+            right: 5vw;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(94, 143, 91, 0.25), transparent);
+        }
+        .gallery-grid {
+            width: min(1000px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 3.5rem);
+        }
+        .gallery-item {
+            position: relative;
+            background: var(--color-paper);
+            padding: clamp(12px, 2vw, 20px);
+            border: 1px solid rgba(20, 40, 18, 0.1);
+            box-shadow:
+                0 2px 4px rgba(20, 40, 18, 0.06),
+                0 12px 36px rgba(20, 40, 18, 0.1);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-item:hover {
+            box-shadow:
+                0 4px 8px rgba(20, 40, 18, 0.08),
+                0 20px 50px rgba(20, 40, 18, 0.15);
+            transform: translateY(-3px);
+        }
+        .gallery-item img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .gallery-item figcaption {
+            margin-top: 10px;
+            text-align: right;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.3em;
+            color: rgba(20, 40, 18, 0.35);
+            font-style: italic;
+        }
+        .gallery-kicker {
+            color: var(--color-primary);
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .reel-hero {
+                padding: 7rem 1.35rem 3.5rem;
+            }
+            .reel-hero .hero-copy {
+                display: block;
+            }
+            .reel-hero .hero-meta {
+                writing-mode: horizontal-tb;
+                margin-top: 1.5rem;
+            }
+            .reel-story {
+                padding: 5rem 1.25rem;
+            }
+            .reel-story-grid {
+                grid-template-columns: 1fr;
+            }
+            .reel-photo-frame {
+                justify-self: center;
+                width: min(420px, 100%);
+            }
+            .reel-copy {
+                text-align: left;
+            }
+            .reel-copy h2 {
+                max-width: none;
+            }
+            .couple-grid {
+                grid-template-columns: minmax(0, 1fr) clamp(1.8rem, 8vw, 2.8rem) minmax(0, 1fr);
+                justify-items: center;
+                gap: 0.5rem;
+                padding: 3.2rem 1rem 2.4rem;
+            }
+            .couple-bow {
+                top: 0.45rem;
+                width: 68%;
+            }
+            .couple-invite-copy {
+                margin: 1.25rem auto 1rem;
+                line-height: 1.75;
+                font-size: 0.9rem;
+                letter-spacing: 0.06em;
+            }
+            .couple-card {
+                width: min(42vw, 200px);
+                min-height: 0;
+            }
+            .couple-heart {
+                width: clamp(26px, 8vw, 38px);
+                height: clamp(26px, 8vw, 38px);
+            }
+            .couple-caption p {
+                font-size: 0.52rem;
+                letter-spacing: 0.16em;
+            }
+            .couple-caption h2 {
+                font-size: clamp(1.08rem, 5.2vw, 1.8rem);
+            }
+            .couple-caption .zh {
+                font-size: clamp(0.62rem, 2.8vw, 0.9rem);
+            }
         }
     </style>
 </head>
@@ -274,6 +809,7 @@
                 </div>
                 <div class="hidden md:flex space-x-10">
                     <a href="#about" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">關於我們</a>
+                    <a href="#gallery" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">照片</a>
                     <a href="#details" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">婚禮詳情</a>
                     <a href="#rsvp" class="text-primary font-semibold border-b-2 border-primary pb-1 text-sm tracking-widest shadow-sm">出席回函</a>
                 </div>
@@ -288,38 +824,36 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-xl absolute w-full border-b border-gray-100 shadow-xl">
+        <div id="mobile-menu" class="md:hidden hidden bg-[#142812]/95 backdrop-blur-xl absolute w-full border-b border-primary/20 shadow-xl">
             <div class="px-4 pt-4 pb-8 space-y-2 text-center">
-                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-500 hover:text-primary rounded-md">關於我們</a>
-                <a href="#details" class="block px-3 py-3 text-base font-medium text-gray-500 hover:text-primary rounded-md">婚禮詳情</a>
-                <a href="#rsvp" class="block px-3 py-3 text-base font-medium text-primary bg-primary/5 rounded-md">出席回函</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">關於我們</a>
+                <a href="#gallery" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">照片</a>
+                <a href="#details" class="block px-3 py-3 text-base font-medium text-[#f7f1e3]/80 hover:text-primary rounded-md">婚禮詳情</a>
+                <a href="#rsvp" class="block px-3 py-3 text-base font-medium text-primary bg-primary/10 rounded-md">出席回函</a>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <header id="home" class="reel-hero relative flex overflow-hidden">
         <div class="absolute inset-0 w-full h-full">
             <div class="absolute inset-0 bg-black/40 z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 z-10"></div>
-            <img src="https://i.postimg.cc/QtSC0mKx/IMG-1695.jpg" alt="Tiana & William" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/1920x1080/e5e0d8/8da399?text=Tiana+%26+William'">
+            <img src="img/S__26501163.jpg" alt="Tiana & William" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/1920x1080/e5e0d8/8da399?text=Tiana+%26+William'">
         </div>
         
         <div class="stardust-container" id="particles"></div>
 
-        <div class="relative z-20 text-center text-white px-4 mt-16 fade-in">
-            <p class="font-cormorant text-xl md:text-2xl tracking-[0.4em] mb-6 text-white/80 uppercase">We are getting married</p>
-            <h1 class="font-cormorant text-7xl md:text-8xl lg:text-9xl mb-4 font-light italic text-gold-gradient leading-tight">Tiana & William</h1>
-            
-            <div class="diamond-divider">
-                <div class="diamond bg-white/70"></div>
+        <div class="hero-copy relative z-20 text-white fade-in">
+            <div>
+                <p class="font-cormorant text-lg md:text-2xl tracking-[0.42em] mb-7 text-white/78 uppercase">We are getting married</p>
+                <h1 class="hero-title font-cormorant font-bold italic text-real-gold">Tiana & William</h1>
+                <p class="mt-8 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
+                <a href="#about" class="reel-cta mt-10 text-xs tracking-[0.28em] uppercase">
+                    Scroll the story
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
             </div>
-            
-            <p class="text-xl md:text-3xl tracking-[0.3em] font-light mb-8 font-serif drop-shadow-md text-white/95">愛在西元前</p>
-            <p class="font-cormorant text-3xl md:text-4xl tracking-widest drop-shadow-lg text-white font-medium">2026 08 16</p>
-            
-            <a href="#rsvp" class="inline-block mt-16 px-10 py-4 border border-white/50 rounded-full text-sm tracking-[0.2em] uppercase hover:bg-white/10 hover:border-white transition-all duration-500 backdrop-blur-sm">
-                RSVP
-            </a>
+            <p class="hero-meta font-cormorant">2026 08 16 / Taipei</p>
         </div>
         
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
@@ -329,7 +863,68 @@
         </div>
     </header>
 
-    <section class="py-24 relative z-10" id="timer-section">
+    <section id="about" class="reel-story relative z-10">
+        <div class="couple-grid">
+            <div class="couple-invite-copy">
+                <p>謝謝有你/妳出現在我們生命裡</p>
+                <p>迫不及待分享這份喜悅</p>
+                <p>遞上最誠摯邀請</p>
+                <p>我們婚禮見！</p>
+            </div>
+            <div class="couple-person slide-up">
+                <div class="couple-caption">
+                    <p>Bride</p>
+                    <h2 class="font-cormorant italic"><span class="zh">新娘 蔡孟庭</span>Tiana</h2>
+                </div>
+                <figure class="couple-card">
+                    <img src="img/S__26501165.jpg" alt="新娘 蔡孟庭 Tiana" loading="lazy">
+                </figure>
+            </div>
+
+            <div class="couple-heart slide-up delay-100" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 64 58">
+                    <path d="M32 51.5C18.2 39.1 9 31.1 9 20.4 9 12.9 14.7 8 21.1 8c4.6 0 8.4 2.6 10.9 6.1C34.5 10.6 38.3 8 42.9 8 49.3 8 55 12.9 55 20.4c0 10.7-9.2 18.7-23 31.1z" fill="white" stroke="rgba(68,70,68,0.36)" stroke-width="2.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="couple-person slide-up delay-100">
+                <div class="couple-caption">
+                    <p>Groom</p>
+                    <h2 class="font-cormorant italic"><span class="zh">新郎 鍾文豪</span>William</h2>
+                </div>
+                <figure class="couple-card">
+                    <img src="img/S__26501167.jpg" alt="新郎 鍾文豪 William" loading="lazy">
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="photo-gallery">
+        <div class="w-[86%] mx-auto max-w-6xl mb-10">
+            <p class="gallery-kicker mb-4">Gallery</p>
+            <h2 class="font-cormorant text-5xl md:text-7xl text-gold-gradient italic leading-none">Little Frames</h2>
+        </div>
+        <div class="gallery-grid">
+            <figure class="gallery-item slide-up">
+                <img src="img/IMG-594.jpg" alt="Tiana and William portrait" loading="lazy">
+                <figcaption>No. 01</figcaption>
+            </figure>
+            <figure class="gallery-item slide-up delay-100">
+                <img src="img/S__26501172.jpg" alt="Tiana and William photo" loading="lazy">
+                <figcaption>No. 02</figcaption>
+            </figure>
+            <figure class="gallery-item slide-up delay-300">
+                <img src="img/S__26501173.jpg" alt="Tiana and William photo" loading="lazy">
+                <figcaption>No. 03</figcaption>
+            </figure>
+            <figure class="gallery-item slide-up delay-500">
+                <img src="img/S__26501174.jpg" alt="Tiana and William photo" loading="lazy">
+                <figcaption>No. 04</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="reel-countdown relative z-10" id="timer-section">
         <div class="max-w-4xl mx-auto px-4 text-center slide-up">
             <h2 class="font-cormorant text-4xl md:text-5xl text-gold-gradient italic mb-3">Countdown</h2>
             <div class="diamond-divider mb-12">
@@ -359,7 +954,7 @@
         </div>
     </section>
 
-    <section id="details" class="py-20 relative">
+    <section id="details" class="reel-details relative">
         <div class="w-[80%] mx-auto max-w-5xl">
             
             <div class="text-center mb-16 slide-up">
@@ -392,32 +987,41 @@
                         <h3 class="text-xl font-semibold tracking-widest mb-2 nowrap text-text-main">台北漢來飯店</h3>
                         <p class="text-gray-500 text-base tracking-widest mb-8 nowrap">三樓 鉑金A廳</p>
 
-                        <div class="text-left mt-8 border border-primary/20 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
-                            <button class="accordion-toggle w-full px-6 py-5 flex justify-between items-center bg-gray-50/50 hover:bg-primary/5 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                        <div class="text-left mt-8 border border-primary/20 rounded-xl overflow-hidden bg-white shadow-sm">
+                            <div class="px-6 py-5 bg-gray-50/50 border-b border-primary/10">
                                 <span class="font-semibold tracking-widest text-text-main flex items-center gap-3">
-                                    交通指引 
+                                    交通指引
                                     <span class="font-cormorant text-primary/70 text-sm italic tracking-normal">Transportation</span>
                                 </span>
-                                <svg class="icon-plus w-5 h-5 text-primary transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                            </button>
-                            <div class="accordion-content">
-                                <div class="p-6 text-sm text-gray-600 leading-relaxed space-y-5 border-t border-gray-100 bg-white">
-                                    <div>
-                                        <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                            開車前往
-                                        </p>
-                                        <p class="pl-6 text-gray-500">導航至 <span class="nowrap font-medium text-text-main">台北市南港區經貿一路168號</span>，飯店備有地下停車場，賓客可享免費停車。</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-                                            大眾運輸
-                                        </p>
-                                        <p class="pl-6 text-gray-500">搭乘捷運板南線或文湖線至 <span class="nowrap text-primary font-medium border-b border-primary/30">南港展覽館站</span>，由 <span class="nowrap">1號出口</span> 出站，步行約 3 分鐘即可抵達。</p>
-                                    </div>
+                            </div>
+                            <div class="p-6 text-sm text-gray-600 leading-relaxed space-y-5 bg-white">
+                                <div>
+                                    <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        開車前往
+                                    </p>
+                                    <p class="pl-6 text-gray-500">導航至 <span class="nowrap font-medium text-text-main">台北市南港區經貿一路168號</span>，飯店備有地下停車場，賓客可享免費停車。</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-text-main mb-2 flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                                        大眾運輸
+                                    </p>
+                                    <p class="pl-6 text-gray-500">搭乘捷運板南線或文湖線至 <span class="nowrap text-primary font-medium border-b border-primary/30">南港展覽館站</span>，由 <span class="nowrap">1號出口</span> 出站，步行約 3 分鐘即可抵達。</p>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="mt-6 rounded-xl overflow-hidden shadow-sm border border-primary/20" style="height: 420px;">
+                            <iframe
+                                src="https://maps.google.com/maps?q=台北市南港區經貿一路168號&output=embed&hl=zh-TW&z=16"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -572,7 +1176,7 @@
 
     <footer class="bg-white pt-20 pb-48 mb-16 border-t border-gray-100 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none"></div>
-        <p class="font-cormorant text-4xl text-gold-gradient italic mb-4 relative z-10">Tiana & William</p>
+        <p class="font-cormorant text-4xl text-real-gold italic font-bold mb-4 relative z-10">Tiana & William</p>
         <p class="text-xs tracking-[0.3em] text-gray-400 font-serif relative z-10">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
     </footer>
 
@@ -581,11 +1185,83 @@
         <span id="toast-message" class="text-sm tracking-wide font-medium"></span>
     </div>
 
+    <button id="music-toggle" class="music-toggle" type="button" aria-label="暫停配樂 blue - yung kai" aria-pressed="true" title="blue - yung kai">
+        <svg class="icon-play w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72c0 .78.86 1.25 1.52.83l10.78-6.86a.98.98 0 000-1.66L9.52 4.31A.98.98 0 008 5.14z"></path></svg>
+        <svg class="icon-pause w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.2c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1H7a1 1 0 01-1-1V6c0-.55.45-1 1-1zm6.8 0H17c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1h-3.2a1 1 0 01-1-1V6c0-.55.45-1 1-1z"></path></svg>
+    </button>
+    <audio id="music-player" class="music-player-frame" src="asset/blue.mp3" loop preload="auto" autoplay></audio>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             createStardust();
+            setupMusicPlayer();
             setupFormSubmit();
         });
+
+        function setupMusicPlayer() {
+            const musicToggle = document.getElementById('music-toggle');
+            const musicPlayer = document.getElementById('music-player');
+            if (!musicToggle || !musicPlayer) {
+                return;
+            }
+
+            musicPlayer.volume = 0.45;
+            musicPlayer.addEventListener('play', () => setMusicButtonState(true));
+            musicPlayer.addEventListener('pause', () => setMusicButtonState(false));
+            musicPlayer.addEventListener('ended', () => setMusicButtonState(false));
+            musicPlayer.addEventListener('error', () => {
+                setMusicButtonState(false);
+                showToast('配樂暫時無法播放，請確認 asset/blue.mp3 是否存在。', true);
+            });
+
+            playBackgroundMusic(false);
+
+            musicToggle.addEventListener('click', () => {
+                if (!musicPlayer.paused) {
+                    pauseBackgroundMusic();
+                } else {
+                    playBackgroundMusic();
+                }
+            });
+        }
+
+        function playBackgroundMusic(showBlockedMessage = true) {
+            const musicPlayer = document.getElementById('music-player');
+            if (!musicPlayer) {
+                return;
+            }
+
+            setMusicButtonState(true);
+
+            musicPlayer.play().catch(error => {
+                console.error("Audio Play Error:", error);
+                setMusicButtonState(false);
+                if (showBlockedMessage) {
+                    showToast('請再點一次播放配樂。', true);
+                }
+            });
+        }
+
+        function pauseBackgroundMusic() {
+            const musicPlayer = document.getElementById('music-player');
+            if (!musicPlayer) {
+                return;
+            }
+
+            musicPlayer.pause();
+            setMusicButtonState(false);
+        }
+
+        function setMusicButtonState(isPlaying) {
+            const musicToggle = document.getElementById('music-toggle');
+            if (!musicToggle) {
+                return;
+            }
+
+            musicToggle.classList.toggle('playing', isPlaying);
+            musicToggle.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+            musicToggle.setAttribute('aria-label', isPlaying ? '暫停配樂 blue - yung kai' : '播放配樂 blue - yung kai');
+        }
 
         function createStardust() {
             const container = document.getElementById('particles');
@@ -612,10 +1288,10 @@
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 nav.classList.add('shadow-md');
-                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
             } else {
                 nav.classList.remove('shadow-md');
-                nav.style.background = 'rgba(253, 245, 246, 0.75)';
+                nav.style.background = 'rgba(255, 255, 255, 0.82)';
             }
         });
 
