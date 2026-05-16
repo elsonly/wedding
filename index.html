@@ -849,8 +849,8 @@
 
         @media (max-width: 900px) {
             .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1.8rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
             }
             .reel-hero {
                 padding: 7rem 1.35rem 3.5rem;
@@ -962,8 +962,8 @@
         <div class="hero-copy relative z-20 text-white fade-in">
             <div>
                 <p class="font-cormorant text-lg md:text-2xl tracking-[0.42em] mb-7 text-white/78 uppercase">We are getting married</p>
-                <h1 class="hero-title font-cormorant font-bold italic text-real-gold">Tiana & William</h1>
-                <p class="mt-64 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
+                <h1 class="hero-title font-cormorant font-bold italic text-real-gold hidden md:block">Tiana & William</h1>
+                <p class="mt-64 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed hidden md:block">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
             </div>
         </div>
     </header>
@@ -1336,6 +1336,11 @@
                     <button type="submit" id="submit-btn" class="btn-submit w-full md:w-auto px-16 py-4 rounded-full font-medium tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg">
                         <span>送出回函</span> <span class="font-cormorant ml-2 text-lg italic">Submit</span>
                     </button>
+                    <div class="mt-10 flex justify-center">
+                        <figure class="w-64 md:w-80" style="background: var(--color-paper); padding: clamp(12px, 2vw, 20px); border: 1px solid rgba(20, 40, 18, 0.1); box-shadow: 0 2px 4px rgba(20, 40, 18, 0.06), 0 12px 36px rgba(20, 40, 18, 0.1);">
+                            <img src="img/S__26542083.jpg" alt="Tiana and William" class="w-full h-auto block">
+                        </figure>
+                    </div>
                 </div>
             </form>
         </div>
