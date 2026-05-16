@@ -78,6 +78,11 @@
             border-bottom: 1px solid rgba(94, 143, 91, 0.2);
             box-shadow: 0 12px 35px rgba(20, 40, 18, 0.1);
         }
+        @media (max-width: 767px) {
+            .glass-nav {
+                background: rgba(255, 255, 255, 1) !important;
+            }
+        }
         .glass-nav a:not(.text-gold-gradient) {
             color: rgba(30, 52, 32, 0.72);
         }
@@ -1393,6 +1398,17 @@
             });
 
             playBackgroundMusic(false);
+
+            // Mobile browsers block autoplay until a user gesture — retry on first touch
+            function tryAutoplayOnMobile() {
+                if (musicPlayer.paused) {
+                    musicPlayer.play().then(() => setMusicButtonState(true)).catch(() => {});
+                }
+                document.removeEventListener('touchstart', tryAutoplayOnMobile);
+                document.removeEventListener('click', tryAutoplayOnMobile);
+            }
+            document.addEventListener('touchstart', tryAutoplayOnMobile, { once: true });
+            document.addEventListener('click', tryAutoplayOnMobile, { once: true });
 
             musicToggle.addEventListener('click', () => {
                 if (!musicPlayer.paused) {
