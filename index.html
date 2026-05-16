@@ -24,6 +24,9 @@
             --color-starlight: #c6dfc2;
         }
 
+        html {
+            font-size: 112%;
+        }
         body {
             font-family: 'Noto Serif TC', serif;
             background:
@@ -667,6 +670,27 @@
         .reel-details {
             padding-top: 7rem;
         }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .slideshow-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+        .slideshow-slide.active {
+            opacity: 1;
+            position: relative;
+        }
+        .slideshow-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         .reel-details .v-card {
             border-radius: 4px;
         }
@@ -939,7 +963,7 @@
             <div>
                 <p class="font-cormorant text-lg md:text-2xl tracking-[0.42em] mb-7 text-white/78 uppercase">We are getting married</p>
                 <h1 class="hero-title font-cormorant font-bold italic text-real-gold">Tiana & William</h1>
-                <p class="mt-52 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
+                <p class="mt-64 text-base md:text-xl tracking-[0.12em] font-light font-serif drop-shadow-md text-white/92 leading-relaxed">Two people, two hearts, two lives,<br>become one heart, one mind, one new life together.</p>
             </div>
         </div>
     </header>
@@ -947,6 +971,7 @@
     <section id="about" class="reel-story relative z-10">
         <div class="couple-grid">
             <div class="couple-invite-copy">
+                <p>致 每一位打開這封邀請的至親好友</p>
                 <p>謝謝有你/妳出現在我們生命裡</p>
                 <p>迫不及待分享這份喜悅</p>
                 <p>遞上最誠摯邀請</p>
@@ -974,7 +999,7 @@
                     <h2 class="font-cormorant"><span class="zh">新郎 鍾文豪</span>William</h2>
                 </div>
                 <figure class="couple-card">
-                    <img src="img/S__26501167.jpg" alt="新郎 鍾文豪 William" loading="lazy">
+                    <img src="img/S__26533892.jpg" alt="新郎 鍾文豪 William" loading="lazy">
                 </figure>
             </div>
         </div>
@@ -987,7 +1012,7 @@
         </div>
         <div class="gallery-grid">
             <figure class="gallery-item slide-up">
-                <img src="img/IMG-594.jpg" alt="Tiana and William portrait" loading="lazy">
+                <img src="img/S__26533890.jpg" alt="Tiana and William portrait" loading="lazy">
                 <figcaption>No. 01</figcaption>
             </figure>
             <figure class="gallery-item slide-up delay-100">
@@ -1049,10 +1074,26 @@
             <div class="v-card ornate-border p-10 md:p-16 slide-up delay-100">
                 <div class="space-y-12">
                     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-20">
-                        <div class="w-full md:w-4/12 flex-shrink-0">
-                            <img src="img/S__26501174.jpg" alt="Tiana and William" class="w-full h-full object-cover rounded-sm" style="max-height: 420px; object-fit: cover;">
+                        <div class="w-full md:w-5/12 flex-shrink-0">
+                            <div class="slideshow" id="calendar-slideshow">
+                                <div class="slideshow-slide active">
+                                    <img src="img/S__26501182_0.jpg" alt="Tiana and William" loading="lazy">
+                                </div>
+                                <div class="slideshow-slide">
+                                    <img src="img/S__26501183_0.jpg" alt="Tiana and William" loading="lazy">
+                                </div>
+                                <div class="slideshow-slide">
+                                    <img src="img/S__26501184_0.jpg" alt="Tiana and William" loading="lazy">
+                                </div>
+                                <div class="slideshow-slide">
+                                    <img src="img/S__26501185_0.jpg" alt="Tiana and William" loading="lazy">
+                                </div>
+                                <div class="slideshow-slide">
+                                    <img src="img/S__26501186_0.jpg" alt="Tiana and William" loading="lazy">
+                                </div>
+                            </div>
                         </div>
-                        <div class="wedding-calendar w-full md:w-8/12">
+                        <div class="wedding-calendar w-full md:w-7/12">
                             <div class="calendar-header">
                                 <span class="calendar-month">August</span>
                                 <span class="calendar-year">2026</span>
@@ -1625,6 +1666,17 @@
                 }
             });
         });
+        // Calendar slideshow
+        (function () {
+            const slides = document.querySelectorAll('#calendar-slideshow .slideshow-slide');
+            if (!slides.length) return;
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 500);
+        })();
     </script>
 </body>
 </html>
