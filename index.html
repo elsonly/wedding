@@ -72,7 +72,7 @@
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(94, 143, 91, 0.2);
@@ -84,6 +84,12 @@
         .glass-nav a:not(.text-gold-gradient):hover,
         .glass-nav a.text-primary {
             color: var(--color-primary);
+        }
+        .nav-link.nav-active {
+            color: var(--color-primary) !important;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 4px;
         }
 
         .ornate-border {
@@ -924,10 +930,10 @@
                     <a href="#" class="font-cormorant text-3xl tracking-widest text-gold-gradient italic font-semibold">T & W</a>
                 </div>
                 <div class="hidden md:flex space-x-10">
-                    <a href="#about" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">關於我們</a>
-                    <a href="#gallery" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">照片</a>
-                    <a href="#details" class="text-gray-500 hover:text-primary transition-colors text-sm tracking-widest">婚禮詳情</a>
-                    <a href="#rsvp" class="text-primary font-semibold border-b-2 border-primary pb-1 text-sm tracking-widest shadow-sm">出席回函</a>
+                    <a href="#about" data-section="about" class="nav-link text-gray-500 hover:text-primary transition-colors text-base tracking-widest">關於我們</a>
+                    <a href="#gallery" data-section="gallery" class="nav-link text-gray-500 hover:text-primary transition-colors text-base tracking-widest">照片</a>
+                    <a href="#details" data-section="details" class="nav-link text-gray-500 hover:text-primary transition-colors text-base tracking-widest">婚禮詳情</a>
+                    <a href="#rsvp" data-section="rsvp" class="nav-link text-gray-500 hover:text-primary transition-colors text-base tracking-widest">出席回函</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
@@ -1303,7 +1309,7 @@
                     <label class="form-label mb-2" for="entry.2080928339">
                         是否需要紙本喜帖 <span class="eng">INVITATION TYPE</span>
                     </label>
-                    <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" onchange="handleInvitationChange()">
+                    <select id="entry.2080928339" name="entry.2080928339" class="form-input bg-transparent" required onchange="handleInvitationChange()">
                         <option value="" disabled selected>請選擇</option>
                         <option value="需要，請寄紙本喜帖給我 (請跳至Q10)  Yes, I need wedding invitation card (go to Q10)">需要，請寄紙本喜帖給我</option>
                         <option value="需要，請寄電子喜帖給我 Yes, I need digital wedding invitation">需要，請寄電子喜帖給我</option>
@@ -1322,7 +1328,7 @@
                     <label class="form-label mb-2" for="entry.1521896031">
                         電子信箱 <span class="eng">EMAIL</span>
                     </label>
-                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" placeholder="寄送行前通知用">
+                    <input type="email" id="entry.1521896031" name="entry.1521896031" class="form-input" required placeholder="寄送行前通知用">
                 </div>
 
                 <div class="relative mt-8">
@@ -1456,16 +1462,38 @@
             }
         }
 
+        // Scroll spy — update active nav link based on current section
+        const navSections = ['about', 'gallery', 'details', 'rsvp'];
+        const navLinks = document.querySelectorAll('.nav-link[data-section]');
+
+        function updateActiveNav() {
+            const scrollY = window.scrollY + 120;
+            let current = '';
+            navSections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.offsetTop <= scrollY) current = id;
+            });
+            navLinks.forEach(link => {
+                if (link.dataset.section === current) {
+                    link.classList.add('nav-active');
+                } else {
+                    link.classList.remove('nav-active');
+                }
+            });
+        }
+
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 nav.classList.add('shadow-md');
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.background = 'rgba(255, 255, 255, 0.97)';
             } else {
                 nav.classList.remove('shadow-md');
-                nav.style.background = 'rgba(255, 255, 255, 0.82)';
+                nav.style.background = 'rgba(255, 255, 255, 0.96)';
             }
+            updateActiveNav();
         });
+        updateActiveNav();
 
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
